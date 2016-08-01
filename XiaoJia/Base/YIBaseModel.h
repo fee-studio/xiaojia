@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Mantle.h"
+#import "MTLModel.h"
 
 @interface YIBaseModel : MTLModel <MTLJSONSerializing> {
 
