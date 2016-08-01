@@ -1,1 +1,0 @@
-../../../MTLManagedObjectAdapter/MTLManagedObjectAdapter/MTLManagedObjectAdapter.h
