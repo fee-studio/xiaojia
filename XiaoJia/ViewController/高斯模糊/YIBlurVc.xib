@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YIBlurVc">
+            <connections>
+                <outlet property="filterIv" destination="UTr-H2-1o5" id="pXp-qU-fNm"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_default.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="UTr-H2-1o5">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="UTr-H2-1o5" secondAttribute="bottom" id="05Z-Wv-5xL"/>
+                <constraint firstItem="UTr-H2-1o5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5gJ-F5-wiX"/>
+                <constraint firstItem="UTr-H2-1o5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SiI-fA-MYf"/>
+                <constraint firstAttribute="trailing" secondItem="UTr-H2-1o5" secondAttribute="trailing" id="cuB-5V-ZIz"/>
+            </constraints>
+            <point key="canvasLocation" x="288" y="289"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="image_default.jpg" width="960" height="540"/>
+    </resources>
+</document>

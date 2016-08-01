@@ -1,0 +1,62 @@
+//
+//  PrefixHeader.pch
+//  BaoBaoJi
+//
+//  Created by efeng on 15/9/5.
+//  Copyright (c) 2015年 buerguo. All rights reserved.
+//
+
+#ifndef XiaoJia_PrefixHeader_pch
+#define XiaoJia_PrefixHeader_pch
+
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import "PODS_HEADER.h"
+
+#import "CategoryUtils.h"
+
+#import "YIAppDelegate.h"
+
+#import "YIGlobalData.h"
+
+#import "YIConfigUtil.h"
+#import "YIConfigUtil+Business.h"
+#import "YIConfigUtil+Switch.h"
+#import "YIConfigUtil+UI.h"
+#import "YIConfigUtil+UMeng.h"
+
+#import "YICommonUtil.h"
+#import "YIFileUtil.h"
+//#import "YIAVOSUtil.h"
+
+//#import "LCUserEntity.h"
+//#import "LCClientEntity.h"
+
+#import "UIDevice+DeviceInfo.h"
+#import "NSError+Adding.h"
+#import "NSString+YI.h"
+#import "UIScreen+Frame.h"
+
+#import "YIMacroDefine.h"
+
+//#import "YINetworkManager.h"
+
+#import "YIBaseDataSource.h"
+#import "YIBaseRequest.h"
+#import "YIBaseViewController.h"
+#import "YIBaseTableViewCell.h"
+#import "YIBaseNavigationController.h"
+#import "YIBaseScrollViewController.h"
+#import "YIBaseCollectionViewController.h"
+
+#import "YISegmentedControlViewController.h"
+
+
+#import "YILogUtil.h"
+#import "UIButton+UI.h"
+
+#import <OpenGLES/ES1/gl.h>
+
+#endif
