@@ -1942,6 +1942,7 @@
 				529D46211D4F7E1000E5F359 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		529D46231D4F7E1100E5F359 /* Build configuration list for PBXNativeTarget "DocumentProvider" */ = {
 			isa = XCConfigurationList;
@@ -1950,6 +1951,7 @@
 				529D461F1D4F7E1000E5F359 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		52DC4A551D4E200300539773 /* Build configuration list for PBXProject "XiaoJia" */ = {
 			isa = XCConfigurationList;

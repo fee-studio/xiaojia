@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YIICloudFolderVc">
             <connections>
+                <outlet property="fileTableView" destination="80H-Bo-uJi" id="TIZ-oh-ajE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,20 +16,43 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m3R-Z0-d1Z">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="80H-Bo-uJi">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="eCe-UY-J0I"/>
+                        <outlet property="delegate" destination="-1" id="gVL-f7-cXR"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="80H-Bo-uJi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Cya-dD-Aez"/>
+                <constraint firstAttribute="trailing" secondItem="80H-Bo-uJi" secondAttribute="trailing" id="RtQ-zM-a2B"/>
+                <constraint firstAttribute="bottom" secondItem="80H-Bo-uJi" secondAttribute="bottom" id="c67-is-yhj"/>
+                <constraint firstItem="80H-Bo-uJi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zsL-u8-QMG"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="322" y="376"/>
+        </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Pxs-7s-Ao1">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vN2-Pd-ws8">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                     <items>
-                        <barButtonItem title="新建" id="pdZ-yV-Cvt"/>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ail-pS-HPy"/>
-                        <barButtonItem title="打开" id="yYN-Oe-GJT"/>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="tWy-ex-yIS"/>
-                        <barButtonItem title="导入" id="hpP-9v-T4f"/>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="66Z-9v-GHr"/>
-                        <barButtonItem title="移动" id="UB9-GJ-8yx"/>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="z0S-wp-0Uy"/>
-                        <barButtonItem title="导出" id="b6Q-Bh-S2y"/>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Hu6-vP-4Wi"/>
-                        <barButtonItem title="保存" id="WWD-N4-nBa"/>
+                        <barButtonItem title="新建" id="NaL-MN-K4u"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="FHf-oV-fdK"/>
+                        <barButtonItem title="打开" id="q7B-r7-x7R"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Xvx-VT-6UL"/>
+                        <barButtonItem title="导入" id="0MO-Zj-PbQ"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="jWq-2U-h83"/>
+                        <barButtonItem title="移动" id="Rsr-h9-T7e"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="7FD-78-Sz1"/>
+                        <barButtonItem title="导出" id="8U7-UP-ktY"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="nPw-N2-WsP"/>
+                        <barButtonItem title="保存" id="H7V-Rt-t0x"/>
                     </items>
                 </toolbar>
             </subviews>

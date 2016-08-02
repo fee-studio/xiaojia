@@ -50,17 +50,41 @@
 }
 
 - (void)startProvidingItemAtURL:(NSURL *)url completionHandler:(void (^)(NSError *))completionHandler {
-    // Should ensure that the actual file is in the position returned by URLForItemWithIdentifier:, then call the completion handler
-    NSError *fileError = nil;
-    
-    // TODO: get the contents of file at <url> from model
-    NSData *fileData = [NSData data];
-    
-    [fileData writeToURL:url options:0 error:&fileError];
-    
-    if (completionHandler) {
-        completionHandler(nil);
-    }
+//    // Should ensure that the actual file is in the position returned by URLForItemWithIdentifier:, then call the completion handler
+//    NSError *fileError = nil;
+//    
+//    // TODO: get the contents of file at <url> from model
+//    NSData *fileData = [NSData data];
+//    
+//    [fileData writeToURL:url options:0 error:&fileError];
+//    
+//    if (completionHandler) {
+//        completionHandler(nil);
+//    }
+	
+	NSError* error = nil;
+	__block NSError* fileError = nil;
+	
+	NSFileManager *fileMgr = [NSFileManager defaultManager];
+	NSString *filePath = [url path];
+	if([fileMgr fileExistsAtPath:filePath]){ //1
+		//文件已存在，返回
+		completionHandler(error);
+		return;
+	}
+	
+	//文件不存在，创建新文件，并写入url
+	NSData *fileData = [@"新建文件：" dataUsingEncoding:NSUTF8StringEncoding]; //2
+	
+	[self.fileCoordinator coordinateWritingItemAtURL:url options:NSFileCoordinatorWritingForReplacing error:&error byAccessor:^(NSURL *newURL) {
+		[fileData writeToURL:newURL options:0 error:&fileError]; //3
+	}];
+	
+	if (error!=nil) {
+		completionHandler(error);
+	} else {
+		completionHandler(fileError);
+	}
 }
 
 
@@ -75,10 +99,19 @@
     // Called after the last claim to the file has been released. At this point, it is safe for the file provider to remove the content file.
     // Care should be taken that the corresponding placeholder file stays behind after the content file has been deleted.
     
-    [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
-    [self providePlaceholderAtURL:url completionHandler:^(NSError * __nullable error) {
-        // TODO: handle any error, do any necessary cleanup
-    }];
+//    [[NSFileManager defaultManager] removeItemAtURL:url error:NULL];
+//    [self providePlaceholderAtURL:url completionHandler:^(NSError * __nullable error) {
+//        // TODO: handle any error, do any necessary cleanup
+//    }];
+	
+	[self.fileCoordinator coordinateWritingItemAtURL:url options:NSFileCoordinatorWritingForDeleting error:NULL byAccessor:^(NSURL *newURL) {
+		[[NSFileManager defaultManager] removeItemAtURL:newURL error:NULL];
+	}];
+	
+	[self providePlaceholderAtURL:url completionHandler:^(NSError * __nullable error) {
+		// TODO: handle any error, do any necessary cleanup
+	}];
+
 }
 
 @end

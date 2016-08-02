@@ -20,7 +20,6 @@
     __weak IBOutlet UITableView *fileTableView;
 
     NSString *storagePath;
-
 }
 @end
 
@@ -46,7 +45,8 @@
     NSString *_storagePath = [groupPath stringByAppendingPathComponent:APP_FILE_NAME];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:_storagePath]) {
-        [fileManager createDirectoryAtPath:_storagePath withIntermediateDirectories:NO attributes:nil error:nil];
+        BOOL success = [fileManager createDirectoryAtPath:_storagePath withIntermediateDirectories:NO attributes:nil error:nil];
+		NSLog(@"success = %d", success);
     }
     return _storagePath;
 }

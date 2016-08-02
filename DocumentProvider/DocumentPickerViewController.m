@@ -8,6 +8,7 @@
 
 #import "DocumentPickerViewController.h"
 
+
 #define APP_GROUP_ID @"group.com.buerguo.box"
 #define APP_FILE_NAME @"XiaoJiaFile"
 
@@ -30,6 +31,17 @@
 
     [itemsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     itemsTableView.backgroundColor = [UIColor whiteColor];
+	
+	
+	UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 100, 100, 44)];
+	[btn setTitle:@"导出到这里啦~" forState:UIControlStateNormal];
+	[btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+	[btn addTarget:self action:@selector(exportFile) forControlEvents:UIControlEventTouchUpInside];
+	btn.backgroundColor = [UIColor grayColor];
+	[self.view addSubview:btn];
+	
+	NSLog(@"2222");
+	
 }
 
 - (void)loadData {
@@ -40,7 +52,7 @@
 }
 
 - (void)prepareForPresentationInMode:(UIDocumentPickerMode)mode {
-
+	NSLog(@"3333");
     switch (mode) {
         case UIDocumentPickerModeImport: {
             self.navigationItem.title = @"请选择导入文件";
@@ -99,10 +111,12 @@
         }
 
         UIView *tableFootView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+		tableFootView.userInteractionEnabled = YES;
         UIButton *btn = [[UIButton alloc] initWithFrame:tableFootView.bounds];
         [btn setTitle:btnTitle forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(exportFile) forControlEvents:UIControlEventTouchUpInside];
+		btn.backgroundColor = [UIColor redColor];
         [tableFootView addSubview:btn];
         return tableFootView;
     }
@@ -110,12 +124,18 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 44;
+	if (self.documentPickerMode == UIDocumentPickerModeExportToService ||
+		self.documentPickerMode == UIDocumentPickerModeMoveToService) {
+		return 44;
+	} else {
+		return 0.01f;
+	}
 }
 
 #pragma mark - exportFile
 
 - (void)exportFile {
+	NSLog(@"1111");
     NSURL *originalURL = self.originalURL;
     NSString *fileName = [originalURL lastPathComponent];
     NSString *exportFilePath = [storagePath stringByAppendingPathComponent:fileName];
