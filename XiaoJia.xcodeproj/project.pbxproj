@@ -34,13 +34,6 @@
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
-		<key>2F8B650A7F94F773105CE3A5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>C81BB8EC28E3ED78A62D14A8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
 		<key>33700BC68FF07C25672904E5</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -53,6 +46,54 @@
 			<string>PBXShellScriptBuildPhase</string>
 			<key>name</key>
 			<string>[CP] Embed Pods Frameworks</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-XiaoJia/Pods-XiaoJia-frameworks.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>4727BCDC9AFED151BB906244</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>[CP] Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-DocumentProvider/Pods-DocumentProvider-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>4BDC73D9EE0968AC12FE5D6F</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Embed Pods Frameworks</string>
 			<key>outputPaths</key>
 			<array/>
 			<key>runOnlyForDeploymentPostprocessing</key>
@@ -163,6 +204,7 @@
 			<key>files</key>
 			<array>
 				<string>522D193C1D539603005BE74C</string>
+				<string>7BAFA062D758D2097C6E0D24</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -188,9 +230,13 @@
 			<string>529D46231D4F7E1100E5F359</string>
 			<key>buildPhases</key>
 			<array>
+				<string>921C7ECA1CF1D28B3E8B6AEC</string>
 				<string>529D45FD1D4F7E1000E5F359</string>
 				<string>529D45FE1D4F7E1000E5F359</string>
 				<string>529D45FF1D4F7E1000E5F359</string>
+				<string>9A90B337CACE0103D118442F</string>
+				<string>4727BCDC9AFED151BB906244</string>
+				<string>B36A5729E436FE0C8F0140DD</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -548,6 +594,8 @@
 		</dict>
 		<key>529D461E1D4F7E1000E5F359</key>
 		<dict>
+			<key>baseConfigurationReference</key>
+			<string>8D66791BA240D53BDD9777BE</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>CODE_SIGN_ENTITLEMENTS</key>
@@ -574,6 +622,8 @@
 		</dict>
 		<key>529D461F1D4F7E1000E5F359</key>
 		<dict>
+			<key>baseConfigurationReference</key>
+			<string>D792D385793FC6A030849007</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>CODE_SIGN_ENTITLEMENTS</key>
@@ -1475,7 +1525,7 @@
 				<string>529D46111D4F7E1000E5F359</string>
 				<string>52DC4A5B1D4E200300539773</string>
 				<string>A2365803ADBFBC67ACECFC0F</string>
-				<string>8834841E04665FEF1984A1C8</string>
+				<string>9EADE22EA3035BCB58CC57A1</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -1749,7 +1799,7 @@
 				<string>52AFF7881D677A55005A0DB2</string>
 				<string>52AFF7951D677A55005A0DB2</string>
 				<string>52AFF7901D677A55005A0DB2</string>
-				<string>2F8B650A7F94F773105CE3A5</string>
+				<string>C60775F86D45EB899089AC5A</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -1837,7 +1887,6 @@
 			<string>52DC4A871D4E200400539773</string>
 			<key>buildPhases</key>
 			<array>
-				<string>733E0AAB8C5E507CEDF0432B</string>
 				<string>E52FC509E9FFFCA4D590A7E9</string>
 				<string>52DC4A561D4E200300539773</string>
 				<string>52DC4A571D4E200300539773</string>
@@ -1845,8 +1894,7 @@
 				<string>529D46241D4F7E1100E5F359</string>
 				<string>33700BC68FF07C25672904E5</string>
 				<string>2D8D5ABDA79B73C3DFDDE2DB</string>
-				<string>75BFC3AF1B36E47F56B1F5DB</string>
-				<string>B4BAD5334CB2D36383EC1F2E</string>
+				<string>4BDC73D9EE0968AC12FE5D6F</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -2379,7 +2427,7 @@
 		<key>52DC4A881D4E200400539773</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>C719126CA047786859F47857</string>
+			<string>F061522A13E4D71ABAD1E864</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
@@ -2437,7 +2485,7 @@
 		<key>52DC4A891D4E200400539773</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>E280A01929BBD2C97764F720</string>
+			<string>757C7E1FBF3E8A6F5220D7EC</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
@@ -7918,7 +7966,57 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>733E0AAB8C5E507CEDF0432B</key>
+		<key>6B48990D2F960F45419B83C0</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-XiaoJia.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>757C7E1FBF3E8A6F5220D7EC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-XiaoJia.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-XiaoJia/Pods-XiaoJia.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7BAFA062D758D2097C6E0D24</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B9D85CE9103EDA32F391442E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8D66791BA240D53BDD9777BE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-DocumentProvider.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-DocumentProvider/Pods-DocumentProvider.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>921C7ECA1CF1D28B3E8B6AEC</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
@@ -7929,7 +8027,7 @@
 			<key>isa</key>
 			<string>PBXShellScriptBuildPhase</string>
 			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
+			<string>[CP] Check Pods Manifest.lock</string>
 			<key>outputPaths</key>
 			<array/>
 			<key>runOnlyForDeploymentPostprocessing</key>
@@ -7948,7 +8046,7 @@ fi
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
-		<key>75BFC3AF1B36E47F56B1F5DB</key>
+		<key>9A90B337CACE0103D118442F</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
@@ -7959,7 +8057,7 @@ fi
 			<key>isa</key>
 			<string>PBXShellScriptBuildPhase</string>
 			<key>name</key>
-			<string>Embed Pods Frameworks</string>
+			<string>[CP] Embed Pods Frameworks</string>
 			<key>outputPaths</key>
 			<array/>
 			<key>runOnlyForDeploymentPostprocessing</key>
@@ -7967,17 +8065,19 @@ fi
 			<key>shellPath</key>
 			<string>/bin/sh</string>
 			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-XiaoJia/Pods-XiaoJia-frameworks.sh"
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-DocumentProvider/Pods-DocumentProvider-frameworks.sh"
 </string>
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
-		<key>8834841E04665FEF1984A1C8</key>
+		<key>9EADE22EA3035BCB58CC57A1</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>C719126CA047786859F47857</string>
-				<string>E280A01929BBD2C97764F720</string>
+				<string>8D66791BA240D53BDD9777BE</string>
+				<string>D792D385793FC6A030849007</string>
+				<string>F061522A13E4D71ABAD1E864</string>
+				<string>757C7E1FBF3E8A6F5220D7EC</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -8006,7 +8106,8 @@ fi
 				<string>52AFF7271D674648005A0DB2</string>
 				<string>522D193B1D539603005BE74C</string>
 				<string>529D46251D4F7E2B00E5F359</string>
-				<string>C81BB8EC28E3ED78A62D14A8</string>
+				<string>B9D85CE9103EDA32F391442E</string>
+				<string>6B48990D2F960F45419B83C0</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -8015,7 +8116,7 @@ fi
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>B4BAD5334CB2D36383EC1F2E</key>
+		<key>B36A5729E436FE0C8F0140DD</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
@@ -8026,7 +8127,7 @@ fi
 			<key>isa</key>
 			<string>PBXShellScriptBuildPhase</string>
 			<key>name</key>
-			<string>Copy Pods Resources</string>
+			<string>Embed Pods Frameworks</string>
 			<key>outputPaths</key>
 			<array/>
 			<key>runOnlyForDeploymentPostprocessing</key>
@@ -8034,27 +8135,12 @@ fi
 			<key>shellPath</key>
 			<string>/bin/sh</string>
 			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-XiaoJia/Pods-XiaoJia-resources.sh"
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-DocumentProvider/Pods-DocumentProvider-frameworks.sh"
 </string>
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
 		</dict>
-		<key>C719126CA047786859F47857</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-XiaoJia.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-XiaoJia/Pods-XiaoJia.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C81BB8EC28E3ED78A62D14A8</key>
+		<key>B9D85CE9103EDA32F391442E</key>
 		<dict>
 			<key>explicitFileType</key>
 			<string>archive.ar</string>
@@ -8063,11 +8149,18 @@ fi
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>path</key>
-			<string>libPods-XiaoJia.a</string>
+			<string>libPods-DocumentProvider.a</string>
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
-		<key>E280A01929BBD2C97764F720</key>
+		<key>C60775F86D45EB899089AC5A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6B48990D2F960F45419B83C0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D792D385793FC6A030849007</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -8076,9 +8169,9 @@ fi
 			<key>lastKnownFileType</key>
 			<string>text.xcconfig</string>
 			<key>name</key>
-			<string>Pods-XiaoJia.release.xcconfig</string>
+			<string>Pods-DocumentProvider.release.xcconfig</string>
 			<key>path</key>
-			<string>Pods/Target Support Files/Pods-XiaoJia/Pods-XiaoJia.release.xcconfig</string>
+			<string>Pods/Target Support Files/Pods-DocumentProvider/Pods-DocumentProvider.release.xcconfig</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -8111,6 +8204,21 @@ fi
 </string>
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
+		</dict>
+		<key>F061522A13E4D71ABAD1E864</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-XiaoJia.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-XiaoJia/Pods-XiaoJia.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

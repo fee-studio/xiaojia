@@ -1,6 +1,10 @@
 platform :ios, '8.0'
 #use_frameworks!
 
+# 使用指定版本的cocoapods来安装第三方库
+# pod _0.39.0_ install
+# 因为新版本的cocoapods安装的CTAssetsPickerController缺少资源文件，暂不知道什么原因
+
 # source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'
 # source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecsMirror.git'
 
@@ -383,3 +387,11 @@ target 'XiaoJia' do
   pod 'ASValueTrackingSlider'
 
 end
+
+
+target 'DocumentProvider' do
+
+  pod 'HexColors'
+
+end
+

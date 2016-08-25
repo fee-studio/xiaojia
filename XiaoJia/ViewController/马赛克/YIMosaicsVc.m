@@ -14,7 +14,7 @@
 
 
 @interface YIMosaicsVc () <UINavigationControllerDelegate,
-        UIImagePickerControllerDelegate> {
+        UIImagePickerControllerDelegate, ASValueTrackingSliderDataSource> {
     UIView *toolView;
     UIView *toolView2;
 
@@ -166,6 +166,7 @@
     slider = [[ASValueTrackingSlider alloc] init];
     slider.minimumValue = 20;
     slider.maximumValue = 50;
+	slider.dataSource = self;
     slider.value = 35;
     [slider addTarget:self action:@selector(onChangeSlider:) forControlEvents:UIControlEventValueChanged];
     [toolView2 addSubview:slider];
@@ -175,19 +176,26 @@
         make.centerY.equalTo(slider.superview);
     }];
 
-    slider.popUpViewCornerRadius = 10.0;
+    slider.popUpViewCornerRadius = 5.0;
     [slider setMaxFractionDigitsDisplayed:0];
-    [slider setPopUpViewArrowLength:6.f];
+    [slider setPopUpViewArrowLength:10.f];
     [slider setPopUpViewHeightPaddingFactor:1.2f];
-    [slider setPopUpViewWidthPaddingFactor:1.5f];
+    [slider setPopUpViewWidthPaddingFactor:1.2f];
     slider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
-    slider.font = [UIFont fontWithName:@"GillSans-Bold" size:22];
+	slider.font = kAppBigFont;
     slider.textColor = [UIColor colorWithHue:0.55 saturation:1.0 brightness:0.5 alpha:1];
 
 }
 
+#pragma mark - ASValueTrackingSliderDataSource
+- (NSString *)slider:(ASValueTrackingSlider *)slider stringForValue:(float)value; {
+	mosaicsView.editView.paintDegree = (int)value;
+	
+	return [NSString stringWithFormat:@"画笔粗细: %d",(int)value];
+}
+
 - (void)onChangeSlider:(UISlider *)slider {
-    mosaicsView.editView.paintDegree = (int) slider.value;
+//    mosaicsView.editView.paintDegree = (int) slider.value;
 
 //	dispatch_async(dispatch_get_main_queue(), ^{
 //		float value = slider.value;

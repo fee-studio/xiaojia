@@ -84,7 +84,6 @@
     // todo ...
 //	return [self loadTempViewController];
 
-
 	[self callThisInDidFinishLaunching];
 
 	NSString *myDeviceId = [CloudPushSDK getDeviceId];

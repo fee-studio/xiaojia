@@ -71,6 +71,7 @@ DEPENDENCIES:
   - FLEX (~> 2.0)
   - FXBlurView
   - GPUImage
+  - HexColors
   - IDMPhotoBrowser
   - iOS-Category
   - JSQMessagesViewController

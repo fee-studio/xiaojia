@@ -7,6 +7,8 @@
 //
 
 #import "DocumentPickerViewController.h"
+#import "YIConfigUtil+UI.h"
+#import "HexColor.h"
 
 
 #define APP_GROUP_ID @"group.com.buerguo.box"
@@ -114,9 +116,9 @@
 		tableFootView.userInteractionEnabled = YES;
         UIButton *btn = [[UIButton alloc] initWithFrame:tableFootView.bounds];
         [btn setTitle:btnTitle forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(exportFile) forControlEvents:UIControlEventTouchUpInside];
-		btn.backgroundColor = [UIColor lightGrayColor];
+		btn.backgroundColor = kAppColorMain;
         [tableFootView addSubview:btn];
         return tableFootView;
     }
@@ -137,7 +139,6 @@
 - (void)exportFile {
 	NSLog(@"1111");
 	
-
     NSURL *originalURL = self.originalURL;
     NSString *fileName = [originalURL lastPathComponent];
     NSString *exportFilePath = [storagePath stringByAppendingPathComponent:fileName];
