@@ -59,4 +59,19 @@
 
 #import <OpenGLES/ES1/gl.h>
 
+#import "UMessage.h"
+
+/*
+ Undefined symbols for architecture x86_64:
+ "_OBJC_CLASS_$_CMMotionManager", referenced from
+ 出来以上错误，import CoreMotion
+ */
+#import <CoreMotion/CoreMotion.h>
+
+#import <WXOpenIMSDKFMWK/YWFMWK.h>
+#import <WXOUIModule/YWUIFMWK.h>
+#import <YWFeedbackServiceFMWK/YWFeedbackServiceFMWK.h>
+
+
+
 #endif

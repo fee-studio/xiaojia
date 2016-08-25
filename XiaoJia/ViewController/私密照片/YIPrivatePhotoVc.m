@@ -258,8 +258,8 @@
 
 - (void)pickAssets:(id)sender {
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+		NSLog(@"PHAuthorizationStatus = %ld", (long)status);
         dispatch_async(dispatch_get_main_queue(), ^{
-
             // init picker
             CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
 
@@ -267,14 +267,14 @@
             picker.delegate = self;
 
             // create options for fetching photo only
-            PHFetchOptions *fetchOptions = [PHFetchOptions new];
-            fetchOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType == %d", PHAssetMediaTypeImage];
-
-            // assign options
-            picker.assetsFetchOptions = fetchOptions;
+//            PHFetchOptions *fetchOptions = [PHFetchOptions new];
+//            fetchOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType == %d", PHAssetMediaTypeImage];
+//
+//            // assign options
+//            picker.assetsFetchOptions = fetchOptions;
 
             // set initial selected assets
-            //			picker.selectedAssets = [NSMutableArray arrayWithArray:self.assets];
+			// picker.selectedAssets = [NSMutableArray arrayWithArray:self.assets];
 
             // to present picker as a form sheet in iPad
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)

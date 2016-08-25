@@ -14,14 +14,13 @@
 #import "iVersion.h"
 #import "YISplashScreen.h"
 #import "YIInitUtil.h"
-#import "YIBlurVc.h"
-
 
 @interface YIAppDelegate () <CLLocationManagerDelegate,
         UIViewControllerTransitioningDelegate,
         UIDocumentInteractionControllerDelegate> {
 
 }
+
 @property(strong, nonatomic) CLLocationManager *locationManager;
 
 @end
@@ -39,7 +38,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-	/*
+	
     // 初始化基本要用到东西.
     [YIInitUtil loadBaseInit];
 
@@ -74,8 +73,7 @@
 //    [self startHeartBeat];
 
     [self loadShortcutItems];
-
-	 */
+	
 
     return YES;
 }
@@ -86,6 +84,43 @@
     // todo ...
 //	return [self loadTempViewController];
 
+
+	[self callThisInDidFinishLaunching];
+
+	NSString *myDeviceId = [CloudPushSDK getDeviceId];
+	NSLog(@"my deivce id === %@", myDeviceId);
+	
+	NSLog(@"收到通知一条1");
+	// 打印自定义参数
+	NSLog(@"自定义参数为 ： %@",launchOptions);
+	
+	[self registerAPNS:application :launchOptions];
+	[self init_tae];
+	
+	// 同时监听网络连接
+	[self listenerOnChannelOpened];
+	[self registerMsgReceive];
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	//设置 AppKey 及 LaunchOptions
+	[UMessage startWithAppkey:@"56bd835ce0f55ac2400003b4" launchOptions:launchOptions];
+	//1.3.0版本开始简化初始化过程。如不需要交互式的通知，下面用下面一句话注册通知即可。
+	[UMessage registerForRemoteNotifications];
+	//for log
+	[UMessage setLogEnabled:YES];
+	
+	// 检测3DTouch快捷键支持
     [self checkShortcutItem:launchOptions];
 
     // 加载应用
@@ -102,6 +137,332 @@
 
     return YES;
 }
+
+#pragma mark - apns
+
+// ====================================== SDK Method. ==================================
+#pragma mark 初始化服务
+- (void)init_tae{
+	
+	//sdk初始化
+//	[[ALBBSDK sharedInstance] setDebugLogOpen:TRUE];// 测试时打开
+	[[ALBBSDK sharedInstance] asyncInit:^{
+		NSLog(@"======================> 初始化成功");
+		/*
+		 VIP
+		 在后台做推送测试的时候，
+		 注意不是用这个device id,
+		 在log里面找一个叫realDeviceId的才可以测试成功。
+		 好郁闷~
+		 不过，
+		 后来发现这个也可以用。操
+		 */
+		NSLog(@"======================> DeviceID：%@", [CloudPushSDK getDeviceId]);
+	}failure:^(NSError *error) {
+		NSLog(@"======================> 初始化失败:%@",error);
+	}];
+}
+
+- (void) listenerOnChannelOpened {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onChannelOpened:) name:@"CCPDidChannelConnectedSuccess" object:nil]; // 注册
+}
+
+#pragma mark 注册苹果的推送
+-(void) registerAPNS :(UIApplication *)application :(NSDictionary *)launchOptions{
+	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+	{
+		// iOS 8 Notifications
+		[application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+		[application registerForRemoteNotifications];
+	}
+	else
+	{
+		// iOS < 8 Notifications
+		[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+	}
+	[CloudPushSDK handleLaunching:launchOptions]; // 作为 apns 消息统计
+}
+
+#pragma mark 注册接收CloudChannel推送下来的消息
+- (void) registerMsgReceive {
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onMessageReceived:) name:@"CCPDidReceiveMessageNotification" object:nil]; // 注册
+}
+
+#pragma mark 推送下来的消息抵达的处理示例
+- (void)onChannelOpened:(NSNotification *)notification {
+//	[MsgToolBox showAlert:@"温馨提示" content:@"消息通道建立成功"];
+	NSLog(@"温馨提示---消息通道建立成功");
+}
+
+// 推送下来的消息抵达的处理示例（上线前如果不使用消息，则不要此外代码））
+- (void)onMessageReceived:(NSNotification *)notification {
+	NSData *data = [notification object];
+	NSString *message = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+	// 报警提示
+	if(![NSThread isMainThread])
+	{
+		dispatch_async(dispatch_get_main_queue(), ^{
+			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"有消息抵达" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+			[alertView show];
+		});
+	} else {
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"有消息抵达" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+		[alertView show];
+	}
+}
+
+
+/**
+ *  您需要在-[AppDelegate application:didFinishLaunchingWithOptions:]中第一时间设置此回调
+ *  在IMSDK截获到Push通知并需要您处理Push时，IMSDK会自动调用此回调
+ */
+- (void)exampleHandleAPNSPush
+{
+	
+	__weak typeof(self) weakSelf = self;
+	
+	[[[YWAPI sharedInstance] getGlobalPushService] addHandlePushBlockV4:^(NSDictionary *aResult, BOOL *aShouldStop) {
+		
+		NSLog(@"冯夷夷 handle apns push");
+		
+		BOOL isLaunching = [aResult[YWPushHandleResultKeyIsLaunching] boolValue];
+		UIApplicationState state = [aResult[YWPushHandleResultKeyApplicationState] integerValue];
+		NSString *conversationId = aResult[YWPushHandleResultKeyConversationId];
+		Class conversationClass = aResult[YWPushHandleResultKeyConversationClass];
+		
+		
+		if (conversationId.length <= 0) {
+			return;
+		}
+		
+		if (conversationClass == NULL) {
+			return;
+		}
+
+//		if (isLaunching) {
+//			/// 用户划开Push导致app启动
+//			
+//			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//				if ([self exampleIsPreLogined]) {
+//					/// 说明已经预登录成功
+//					YWConversation *conversation = nil;
+//					if (conversationClass == [YWP2PConversation class]) {
+//						conversation = [YWP2PConversation fetchConversationByConversationId:conversationId creatIfNotExist:YES baseContext:weakSelf.ywIMKit.IMCore];
+//					} else if (conversationClass == [YWTribeConversation class]) {
+//						conversation = [YWTribeConversation fetchConversationByConversationId:conversationId creatIfNotExist:YES baseContext:weakSelf.ywIMKit.IMCore];
+//					}
+//					if (conversation) {
+//						[weakSelf exampleOpenConversationViewControllerWithConversation:conversation fromNavigationController:[weakSelf conversationNavigationController]];
+//					}
+//				}
+//			});
+//			
+//		} else {
+//			/// app已经启动时处理Push
+//			
+//			if (state != UIApplicationStateActive) {
+//				if ([self exampleIsPreLogined]) {
+//					/// 说明已经预登录成功
+//					YWConversation *conversation = nil;
+//					if (conversationClass == [YWP2PConversation class]) {
+//						conversation = [YWP2PConversation fetchConversationByConversationId:conversationId creatIfNotExist:YES baseContext:weakSelf.ywIMKit.IMCore];
+//					} else if (conversationClass == [YWTribeConversation class]) {
+//						conversation = [YWTribeConversation fetchConversationByConversationId:conversationId creatIfNotExist:YES baseContext:weakSelf.ywIMKit.IMCore];
+//					}
+//					if (conversation) {
+//						[weakSelf exampleOpenConversationViewControllerWithConversation:conversation fromNavigationController:[weakSelf conversationNavigationController]];
+//					}
+//				}
+//			} else {
+//				/// 应用处于前台
+//				/// 建议不做处理，等待IM连接建立后，收取离线消息。
+//			}
+//		}
+	} forKey:self.description ofPriority:YWBlockPriorityDeveloper];
+}
+
+/**
+ *  程序完成启动，在appdelegate中的 application:didFinishLaunchingWithOptions:一开始的地方调用
+ */
+- (void)callThisInDidFinishLaunching
+{
+	// 云推送
+#if DEBUG
+	[[[YWAPI sharedInstance] getGlobalPushService] setXPushCertName:@"sandbox"];
+#else
+	[[[YWAPI sharedInstance] getGlobalPushService] setXPushCertName:@"production"];
+#endif
+	
+	if ([self exampleInit]) {
+		// 在IMSDK截获到Push通知并需要您处理Push时，IMSDK会自动调用此回调
+		[self exampleHandleAPNSPush];
+
+		// 在IMSDK收到反馈消息通知时，IMSDK会自动调用此回调
+		[self exampleListenFeedbackNewMessage];
+	} else {
+		/// 初始化失败，需要提示用户
+		UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"错误" message:@"SDK初始化失败, 请检查网络后重试" delegate:self cancelButtonTitle:@"重试" otherButtonTitles:nil];
+		[av show];
+	}
+}
+
+/**
+ *  初始化示例代码
+ */
+- (BOOL)exampleInit;
+{
+	/// 开启日志
+	[[YWAPI sharedInstance] setLogEnabled:YES];
+	
+	NSLog(@"SDKVersion:%@", [YWAPI sharedInstance].YWSDKIdentifier);
+	
+	NSError *error = nil;
+	
+	/// 异步初始化IM SDK
+	// 设置环境，开发者可以不设置。默认是 线上环境 YWEnvironmentRelease
+	// todo ...
+//	[[YWAPI sharedInstance] setEnvironment:[self lastEnvironment].intValue];
+//	[[YWAPI sharedInstance] setEnvironment:YWEnvironmentSandBox];
+	[[YWAPI sharedInstance] setEnvironment:YWEnvironmentRelease];
+	
+	if ([self lastEnvironment].intValue == YWEnvironmentRelease || [self lastEnvironment].intValue == YWEnvironmentPreRelease) {
+		//#warning TODO: CHANGE TO YOUR AppKey
+		/// 线上环境，更换成你自己的AppKey
+		[[YWAPI sharedInstance] syncInitWithOwnAppKey:@"23437490" getError:&error];
+	} else {
+		// OpenIM内网环境，暂时不向开发者开放，需要测试环境的，自行申请另一个Appkey作为测试环境
+		//        [[YWAPI sharedInstance] syncInitWithOwnAppKey:@"4272" getError:&error];
+		[[YWAPI sharedInstance] syncInitWithOwnAppKey:@"23437490" getError:&error];
+	}
+	
+	if (error.code != 0 && error.code != YWSdkInitErrorCodeAlreadyInited) {
+		/// 初始化失败
+		return NO;
+	} else {
+		if (error.code == 0) {
+			/// 首次初始化成功
+			/// 获取一个IMKit并持有
+			self.ywIMKit = [[YWAPI sharedInstance] fetchIMKitForOpenIM];
+			[[self.ywIMKit.IMCore getContactService] setEnableContactOnlineStatus:YES];
+
+            [self.ywIMKit setFetchProfileForPersonBlock:^(YWPerson *aPerson, YWTribe *aTribe, YWProfileProgressBlock aProgressBlock, YWProfileCompletionBlock aCompletionBlock) {
+                if (aPerson.personId.length == 0) {
+                    return;
+                }
+
+                /// 如果你接入使用反馈功能并希望能够自定义显示头像，可参考如下实现：
+                /// 登陆反馈请替换使用YWFeedbackServiceForIMCore(self.ywIMKit.IMCore)，并只需拦截FeedbackReceiver
+                if ([YWAnonFeedbackService isFeedbackSender:aPerson]) {
+                    YWProfileItem *item = [YWProfileItem new];
+                    item.person = aPerson;
+                    item.avatar = [UIImage imageNamed:@"icloud-icon"];
+                    aCompletionBlock(YES, item);
+                    return;
+                } else if ([YWAnonFeedbackService isFeedbackReceiver:aPerson]) {
+                    YWProfileItem *item = [YWProfileItem new];
+                    item.person = aPerson;
+                    item.displayName = @"您好, 请直言";
+                    item.avatar = [UIImage imageNamed:@"icon_120"];
+                    aCompletionBlock(YES, item);
+                    return;
+                }
+
+                /// Demo中模拟了异步获取Profile的过程，你需要根据实际情况，从你的服务器获取用户profile
+                YWProfileItem *item = [YWProfileItem new];
+                item.person = aPerson;
+                // 如果先获取了部分信息，那么可以通过aProgressBlock回调，可以回调多次
+                item.displayName = @"我是昵称";
+                aProgressBlock(item);
+
+                // 异步获取其他信息
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    // 获取全部信息，通过aCompletionBlock回调，第一个参数为YES时更新缓存，aCompletionBlock只能回调一次，一旦回调后请不要使用aCompletionBlock或者aProgressBlock回调。
+                    item.avatar = [UIImage imageNamed:@"demo_head_120"];
+                    aCompletionBlock(YES, item);
+                });
+            }];
+
+
+        } else {
+			/// 已经初始化
+		}
+		return YES;
+	}
+}
+
+- (NSNumber *)lastEnvironment
+{
+	NSNumber *environment = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastEnvironment"];
+	if (environment == nil) {
+		return @(YWEnvironmentRelease);
+	}
+	return environment;
+}
+
+- (void)exampleListenFeedbackNewMessage
+{
+	NSLog(@"匿名账号消息监听");
+	__weak typeof(self) weakSelf = self;
+	/// 这里演示的是匿名账号消息监听，云旺账号参考exampleListenNewMessage
+	[YWAnonFeedbackService setOnNewMessageBlock:^(BOOL aIsLaunching, UIApplicationState aState) {
+		if ( aIsLaunching || aState != UIApplicationStateActive ) {
+			[YWAnonFeedbackService makeFeedbackConversationWithCompletionBlock:^(YWFeedbackConversation *conversation, NSError *error) {
+				NSLog(@"继续再往下做。");
+//				[weakSelf exampleOpenFeedbackViewController:YES fromViewController:weakSelf.window.rootViewController];
+			}];
+		} else {
+			/// 播放声音或者跳转打开反馈页面等方式提醒用户有新的反馈消息
+			NSLog(@"继续再往下做。。。。");
+		}
+	}];
+	
+	
+
+//	__weak typeof(self) weakSelf = self;
+//	/// 这里演示的是匿名账号消息监听，云旺账号反馈请参考exampleListenNewMessage和exampleHandleAPNSPush
+//	[YWAnonFeedbackService setOnNewMessageBlock:^(BOOL aIsLaunching, UIApplicationState aState) {
+//		if ( aIsLaunching || aState != UIApplicationStateActive ) {
+//			[YWAnonFeedbackService makeFeedbackConversationWithCompletionBlock:^(YWFeedbackConversation *conversation, NSError *error) {
+//				[weakSelf exampleOpenFeedbackViewController:YES fromViewController:[weakSelf rootNavigationController]];
+//			}];
+//		} else {
+//			/// 播放声音或者跳转打开反馈页面等方式提醒用户有新的反馈消息
+//		}
+//	}];
+}
+
+
+- (BOOL)openIMInit;
+{
+//	/// 设置环境
+//	[[YWAPI sharedInstance] setEnvironment:YWEnvironmentRelease];
+//	/// 开启日志
+//	[[YWAPI sharedInstance] setLogEnabled:YES];
+// 
+//	NSLog(@"SDKVersion:%@", [YWAPI sharedInstance].YWSDKIdentifier);
+// 
+//	NSError *error = nil;
+// 
+//	/// 异步初始化IM SDK
+//	[[YWAPI sharedInstance] syncInitWithOwnAppKey:@"23437490" getError:&error];
+// 
+//	if (error.code != 0 && error.code != YWSdkInitErrorCodeAlreadyInited) {
+//		/// 初始化失败
+//		return NO;
+//	} else {
+//		if (error.code == 0) {
+//			/// 首次初始化成功
+//			/// 获取一个IMKit并持有
+//			self.ywIMKit = [[YWAPI sharedInstance] fetchIMKitForOpenIM];
+//		} else {
+//			/// 已经初始化
+//		}
+//		return YES;
+//	}
+	
+	return YES;
+}
+ 
 
 - (BOOL)loadTempViewController {
 	UIViewController *vc = [UIViewController new];
@@ -470,12 +831,18 @@
 }
  */
 
-#pragma mark - iCloud、预览文件 功能相关的代码在这里
+#pragma mark - iCloud、预览文件 功能相关的代码在这里 & 微信分享回调
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *, id> *)options {
-	
-    [self previewDocument:url];
+	NSString *scheme = [url scheme];
+	// 只有在file回调时候才能这样
+	if ([scheme isEqualToString:@"file"]) {
+		[self previewDocument:url];
+		[self syncFileToIcloudDrive:url];
+	}
 
+	return YES;
+	
     /*
     // 文件名
     NSString *path = [url absoluteString];
@@ -510,9 +877,8 @@
     //	}];
      */
 
-    [self syncFileToIcloudDrive:url];
 
-    return YES;
+	
 }
 
 - (void)syncFileToIcloudDrive:(NSURL *)url {
@@ -586,8 +952,9 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     mGlobalData.deviceToken = [deviceToken hexadecimalString];
-
     NSLog(@"推送注册成功: Device Token is %@", mGlobalData.deviceToken);
+	// 关键
+	[CloudPushSDK registerDevice:deviceToken];
 
     // 友盟
     [UMessage registerDeviceToken:deviceToken];
@@ -612,12 +979,32 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSLog(@"=== 收到推送通知 ===");
-
+	[UMessage didReceiveRemoteNotification:userInfo];
+	
 //    int notificationType = [userInfo[@"t"] intValue];
 //    NSDictionary *aps = userInfo[@"aps"];
 //    id alert = aps[@"alert"];
 //    NSString *message = nil;
+	
+	/// app open
+	
+	NSLog(@"收到通知一条2~");
+	// 打印自定义参数
+	NSLog(@"自定义参数为 ： %@",userInfo);
+	
+	[CloudPushSDK handleReceiveRemoteNotification:userInfo];
+
 }
+
+/// iOS8下申请DeviceToken
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+	if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
+		[[UIApplication sharedApplication] registerForRemoteNotifications];
+	}
+}
+#endif
 
 #pragma mark - 3D touch 回调
 

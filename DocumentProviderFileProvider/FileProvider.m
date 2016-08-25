@@ -49,6 +49,7 @@
     }
 }
 
+//文件保护，文件不存在则创建新文件
 - (void)startProvidingItemAtURL:(NSURL *)url completionHandler:(void (^)(NSError *))completionHandler {
 //    // Should ensure that the actual file is in the position returned by URLForItemWithIdentifier:, then call the completion handler
 //    NSError *fileError = nil;

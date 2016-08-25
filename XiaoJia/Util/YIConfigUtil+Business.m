@@ -11,7 +11,8 @@
 
 
 + (void)toOpenWxScan {
-    NSString *pqyUrlScheme = @"weixin://dl/scan";
+    NSString *pqyUrlScheme = @"weixin://";
+//	NSString *pqyUrlScheme = @"weixin://dl/scan";
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:pqyUrlScheme]]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:pqyUrlScheme]];
     }

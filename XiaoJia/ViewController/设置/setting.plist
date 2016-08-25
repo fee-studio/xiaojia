@@ -15,6 +15,20 @@
                 <key>target</key>
                 <string>YIToolPickerVc</string>
             </dict>
+			
+			<dict>
+				<key>id</key>
+				<string>1002</string>
+				<key>image</key>
+				<string>gaosimohu_icon</string>
+				<key>name</key>
+				<string>用户反馈</string>
+				<key>detail</key>
+				<string></string>
+				<key>target</key>
+				<string></string>
+			</dict>
+
         </array>
     </array>
 </plist>

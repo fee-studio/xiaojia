@@ -9,7 +9,7 @@
 #import "YIICloudFolderVc.h"
 
 #define APP_GROUP_ID @"group.com.buerguo.box"
-#define APP_FILE_NAME @"FileProviderStorage/XiaoJiaFile"
+#define APP_FILE_NAME @"File Provider Storage/XiaoJiaFile"
 
 #define CellIdentifier @"cellIde"
 
@@ -34,7 +34,6 @@
     [self writeFirstFileToShare];
 
     [self loadData];
-
 }
 
 #pragma mark - 获取共享容器文件夹路径
@@ -88,6 +87,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     NSString *docFilePath = [storagePath stringByAppendingPathComponent:fileNamesArray[indexPath.row]];
+	[mAppDelegate previewDocument:[NSURL fileURLWithPath:docFilePath]];
+	
+	/*
     NSString *fileContent = [[NSString alloc] initWithContentsOfFile:docFilePath encoding:NSUTF8StringEncoding error:nil];
 
     UIViewController *viewCtrl = [UIViewController new];
@@ -97,7 +99,7 @@
     [viewCtrl.view addSubview:textView];
 
     [self.navigationController pushViewController:viewCtrl animated:YES];
-
+	 */
 }
 
 

@@ -13,6 +13,7 @@
 #import "iVersion.h"
 #import "YIPrivatePhotoVc.h"
 #import "YIPasswordManager.h"
+#import <CTAssetsPickerController/CTAssetsPickerController.h>
 
 
 @interface YIIndexVc () <UIDocumentPickerDelegate> {
@@ -228,7 +229,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+	
     id targetObject = _tools[indexPath.section][indexPath.row][@"target"];
     NSNumber *itemId = _tools[indexPath.section][indexPath.row][@"id"];
     NSInteger itemIdCode = [itemId integerValue];
@@ -242,9 +243,8 @@
             [YIShareUtil toWxShareAppPromotionPage];
         } else if (itemIdCode == 1007) {
             UIDocumentPickerViewController *documentPicker = [[UIDocumentPickerViewController alloc]
-                    initWithDocumentTypes:@[@"public.data"]
+                    initWithDocumentTypes:@[@"public.data", @"public.content", @"public.item"]
                                    inMode:UIDocumentPickerModeOpen];
-
             documentPicker.delegate = self;
             documentPicker.modalPresentationStyle = UIModalPresentationFormSheet;
             [self presentViewController:documentPicker animated:YES completion:nil];

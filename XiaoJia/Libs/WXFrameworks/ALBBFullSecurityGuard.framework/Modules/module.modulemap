@@ -1,0 +1,6 @@
+framework module ALBBFullSecurityGuard {
+  umbrella header "ALBBFullSecurityGuard.h"
+
+  export *
+  module * { export * }
+}

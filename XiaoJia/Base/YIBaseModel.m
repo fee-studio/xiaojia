@@ -25,6 +25,7 @@
     return isSuccess;
 }
 
+// todo ...看下这里
 + (id)fetchData {
     NSString *filePath = [self.class _filePath];
     id baseModel = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];

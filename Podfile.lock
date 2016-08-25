@@ -2,11 +2,11 @@ PODS:
   - AMapFoundation (1.1.0)
   - AMapLocation (2.1.0):
     - AMapFoundation (~> 1.1)
-  - AMapSearch (4.1.0):
+  - AMapSearch (4.2.0):
     - AMapFoundation (~> 1.0)
   - ASValueTrackingSlider (0.11.2)
   - CSStickyHeaderFlowLayout (0.2.10)
-  - CTAssetsPickerController (3.2.4):
+  - CTAssetsPickerController (3.3.1):
     - PureLayout (~> 3.0.0)
   - DACircularProgress (2.3.1)
   - DZNEmptyDataSet (1.8.1)
@@ -53,12 +53,10 @@ PODS:
   - TSMessages (0.9.12):
     - HexColors (~> 2.2.0)
   - UIAlertView-Blocks (1.0)
-  - UICollectionView-ARDynamicHeightLayoutCell (1.0)
   - UITextView+Placeholder (1.2.0)
   - UIView+Borders (0.0.2)
-  - UMengAnalytics (4.0.4)
+  - UMengAnalytics (4.1.0)
   - UMengFeedback (2.3.4)
-  - UMengMessage (1.1.0.2)
   - ZXingObjC (3.1.0):
     - ZXingObjC/All (= 3.1.0)
   - ZXingObjC/All (3.1.0)
@@ -68,7 +66,7 @@ DEPENDENCIES:
   - AMapSearch
   - ASValueTrackingSlider
   - CSStickyHeaderFlowLayout
-  - CTAssetsPickerController (~> 3.2.0)
+  - CTAssetsPickerController (~> 3.3.1)
   - DZNEmptyDataSet
   - FLEX (~> 2.0)
   - FXBlurView
@@ -93,29 +91,18 @@ DEPENDENCIES:
   - TOWebViewController
   - TSMessages
   - UIAlertView-Blocks
-  - UICollectionView-ARDynamicHeightLayoutCell (from `https://github.com/iosfeng/UICollectionView-ARDynamicHeightLayoutCell.git`)
   - UITextView+Placeholder
   - UIView+Borders
   - UMengAnalytics
   - UMengFeedback (~> 2.3.3)
-  - UMengMessage (~> 1.1.0.1)
-
-EXTERNAL SOURCES:
-  UICollectionView-ARDynamicHeightLayoutCell:
-    :git: https://github.com/iosfeng/UICollectionView-ARDynamicHeightLayoutCell.git
-
-CHECKOUT OPTIONS:
-  UICollectionView-ARDynamicHeightLayoutCell:
-    :commit: 0eeb32fbeb404bfd45784ce8be87b15f95ba3a30
-    :git: https://github.com/iosfeng/UICollectionView-ARDynamicHeightLayoutCell.git
 
 SPEC CHECKSUMS:
   AMapFoundation: 15db20567e6512422a086a01b42a88b145bc2500
   AMapLocation: 343abc9ccd971ad27e459f38b5b082eabebf8792
-  AMapSearch: cb4722480d2d4331a032d43bd1070ed0fa55dac9
+  AMapSearch: 788020fca7ed18819e8bc2bfca716a6775a05ada
   ASValueTrackingSlider: 45c9f78252da60de01d8f2afe869aaf90dd978d9
   CSStickyHeaderFlowLayout: 5366582779d8b7c9ba9b9cc729c218cc23888776
-  CTAssetsPickerController: bc7264c9bc40064b7de4a66bf9948c2c5ce3f355
+  CTAssetsPickerController: b1d1d50ab87cf6b8b13531de5f4530482e7e53ed
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FLEX: ba80ea13d2c784e85e616137fd4eff164781e364
@@ -145,12 +132,10 @@ SPEC CHECKSUMS:
   TOWebViewController: a29908019f7e0e0f8eccfab8a1ee8dcdf4fc5aac
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
   UIAlertView-Blocks: 7904744fca618afbd2ec646608924f5e69d5acd1
-  UICollectionView-ARDynamicHeightLayoutCell: 560154abd491f89ad6381fa76bfb091cee2b3f37
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   UIView+Borders: d632c8bef679e7f98e913b569e972858742841ce
-  UMengAnalytics: 4ed421fb3bca63b26fc13c947743cabf3831d199
+  UMengAnalytics: 19b28253793d77dff10fb7d502faad1fb6b8ce4a
   UMengFeedback: 5283cc0e324dffca4dd54c4abb3cbded56487817
-  UMengMessage: 48fac77da8a71729c3d9c40eed16151d8917d9b3
   ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
 
 COCOAPODS: 0.39.0

@@ -190,10 +190,19 @@
 #pragma mark -
 
 - (void)feedbackAction:(id)sender {
-//    [MobClick event:CLICK_FEEDBACK_ENTER];
-    YIMessagesViewController *vc = [YIMessagesViewController messagesViewController];
-    [self.navigationController pushViewController:vc animated:YES];
+	// 友盟反馈
+//    YIMessagesViewController *vc = [YIMessagesViewController messagesViewController];
+//    [self.navigationController pushViewController:vc animated:YES];
 
+	// 阿里百川反馈
+	__weak typeof(self) weakSelf = self;
+	[YWAnonFeedbackService makeFeedbackConversationWithCompletionBlock:^(YWFeedbackConversation *conversation, NSError *error) {
+		if ( conversation != nil ) {
+			YWFeedbackViewController *feedback = [[mAppDelegate ywIMKit] makeFeedbackViewControllerWithConversation:conversation];
+			[weakSelf.navigationController pushViewController:feedback animated:YES];
+		} else {
+		}
+	}];
 }
 
 #pragma mark -

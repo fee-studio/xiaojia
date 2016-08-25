@@ -5,6 +5,12 @@
 
 #import "YISettingVc.h"
 
+#if __has_include("YWFeedbackServiceFMWK/YWFeedbackServiceFMWK.h")
+#import <YWFeedbackServiceFMWK/YWFeedbackServiceFMWK.h>
+#define HAS_FEEDBACK 1
+#endif
+
+
 @interface YISettingVc () {
 
 }
@@ -55,12 +61,56 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    id target = _settingOptions[indexPath.section][indexPath.row][@"target"];
-
-    Class targetClass = NSClassFromString(target);
-    YIBaseViewController *vc = [[targetClass alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+	
+	NSDictionary *option = _settingOptions[indexPath.section][indexPath.row];
+	id target = option[@"target"];
+	NSInteger index = [option[@"id"] integerValue];
+	
+	if (target && ![target isEqual:@""]) {
+		Class targetClass = NSClassFromString(target);
+		YIBaseViewController *vc = [[targetClass alloc] init];
+		[self.navigationController pushViewController:vc animated:YES];
+	} else {
+		if (index == 1002) {
+			
+			__weak typeof(self) weakSelf = self;
+			[YWAnonFeedbackService makeFeedbackConversationWithCompletionBlock:^(YWFeedbackConversation *conversation, NSError *error) {
+				if ( conversation != nil ) {
+					YWFeedbackViewController *feedback = [[mAppDelegate ywIMKit] makeFeedbackViewControllerWithConversation:conversation];
+					[weakSelf.navigationController pushViewController:feedback animated:YES];
+					
+					
+//					if ( [aViewController isKindOfClass:[UINavigationController class]] ) {
+//						UINavigationController *nav = (UINavigationController *)aViewController;
+//						[nav setNavigationBarHidden:NO animated:YES];
+//						[nav pushViewController:feedback animated:YES];
+//					} else {
+//						if ( aViewController.navigationController ) {
+//							[aViewController.navigationController setNavigationBarHidden:NO animated:NO];
+//							[aViewController.navigationController pushViewController:feedback animated:YES];
+//						} else {
+//							UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:feedback];
+//							
+//							UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain andBlock:^{
+//								[aViewController dismissViewControllerAnimated:YES completion:nil];
+//							}];
+//							
+//							feedback.navigationItem.rightBarButtonItem = rightBarButtonItem;
+//							
+//							[aViewController presentViewController:navigationController animated:YES completion:nil];
+//						}
+//					}
+				} else {
+//					[[SPUtil sharedInstance] showNotificationInViewController:nil title:@"反馈页面打开出错"
+//																	 subtitle:[NSString stringWithFormat:@"%@", error]
+//																		 type:SPMessageNotificationTypeError];
+				}
+			}];
+			 
+		} else {
+			
+		}
+	}
 }
 
 

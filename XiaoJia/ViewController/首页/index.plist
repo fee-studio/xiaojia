@@ -9,7 +9,7 @@
                 <key>image</key>
                 <string>mosaic</string>
                 <key>name</key>
-                <string>iCloud文件夹</string>
+                <string>小加文件夹</string>
                 <key>detail</key>
                 <string></string>
                 <key>target</key>
@@ -19,7 +19,7 @@
                 <key>id</key>
                 <string>1006</string>
                 <key>image</key>
-                <string>mosaic</string>
+                <string>mosaics-icon</string>
                 <key>name</key>
                 <string>图片-马赛克</string>
                 <key>detail</key>

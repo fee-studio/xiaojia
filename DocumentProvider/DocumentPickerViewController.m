@@ -33,12 +33,12 @@
     itemsTableView.backgroundColor = [UIColor whiteColor];
 	
 	
-	UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 100, 100, 44)];
-	[btn setTitle:@"导出到这里啦~" forState:UIControlStateNormal];
-	[btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-	[btn addTarget:self action:@selector(exportFile) forControlEvents:UIControlEventTouchUpInside];
-	btn.backgroundColor = [UIColor grayColor];
-	[self.view addSubview:btn];
+//	UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 100, 100, 44)];
+//	[btn setTitle:@"导出到这里啦~" forState:UIControlStateNormal];
+//	[btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//	[btn addTarget:self action:@selector(exportFile) forControlEvents:UIControlEventTouchUpInside];
+//	btn.backgroundColor = [UIColor grayColor];
+//	[self.view addSubview:btn];
 	
 	NSLog(@"2222");
 	
@@ -116,7 +116,7 @@
         [btn setTitle:btnTitle forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(exportFile) forControlEvents:UIControlEventTouchUpInside];
-		btn.backgroundColor = [UIColor redColor];
+		btn.backgroundColor = [UIColor lightGrayColor];
         [tableFootView addSubview:btn];
         return tableFootView;
     }
@@ -136,6 +136,8 @@
 
 - (void)exportFile {
 	NSLog(@"1111");
+	
+
     NSURL *originalURL = self.originalURL;
     NSString *fileName = [originalURL lastPathComponent];
     NSString *exportFilePath = [storagePath stringByAppendingPathComponent:fileName];
@@ -147,8 +149,10 @@
         //2. 通过文件协调器访问读取该文件
         NSFileCoordinator *fileCoordinator = [NSFileCoordinator new];
         NSError *error = nil;
-        [fileCoordinator coordinateReadingItemAtURL:originalURL options:NSFileCoordinatorReadingWithoutChanges error:&error byAccessor:^(NSURL *_Nonnull newURL) {
-
+        [fileCoordinator coordinateReadingItemAtURL:originalURL
+											options:NSFileCoordinatorReadingWithoutChanges
+											  error:&error
+										 byAccessor:^(NSURL *_Nonnull newURL) {
             //3.保存文件到共享容器
             [self saveFileFromURL:newURL toFileURL:[NSURL fileURLWithPath:exportFilePath]];
         }];
