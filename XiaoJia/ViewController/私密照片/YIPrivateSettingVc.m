@@ -227,7 +227,7 @@
     } else if (section == 1) {
         return 0.01;
     } else if (section == 2) {
-        return 45.f;
+        return 60.f;
     } else {
         return 0.01;
     }
