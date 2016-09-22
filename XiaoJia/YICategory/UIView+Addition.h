@@ -24,6 +24,7 @@
 - (void)cornerStyle;
 
 - (void)borderStyle;
+- (void)borderStyle:(CGFloat)borderWidth;
 
 - (void)flashlightSwitchStyle;
 

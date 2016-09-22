@@ -1,0 +1,22 @@
+[
+  {
+    "name": "工资",
+    "icon_name": "icon_zysr_gzsr"
+  },
+  {
+    "name": "利息",
+    "icon_name": "icon_zysr_lxsr"
+  },
+  {
+    "name": "兼职",
+    "icon_name": "icon_zysr_jzsr"
+  },
+  {
+    "name": "奖金",
+    "icon_name": "icon_zysr_jjsr"
+  },
+  {
+    "name": "贷款",
+    "icon_name": "icon_qtsr_xykhk"
+  }
+]

@@ -72,6 +72,6 @@
 #import <WXOUIModule/YWUIFMWK.h>
 #import <YWFeedbackServiceFMWK/YWFeedbackServiceFMWK.h>
 
-
+#import "YIProgressHUD.h"
 
 #endif

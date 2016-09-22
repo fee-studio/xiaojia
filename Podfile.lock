@@ -37,9 +37,14 @@ PODS:
     - Mantle (~> 2.0)
   - MZTimerLabel (0.5.4)
   - NSDate+TimeAgo (1.0.6)
+  - PNChart (0.8.9):
+    - UICountingLabel (~> 1.2.0)
   - pop (1.0.9)
   - PureLayout (3.0.2)
   - QBImagePickerController (3.4.0)
+  - Realm (1.0.2):
+    - Realm/Headers (= 1.0.2)
+  - Realm/Headers (1.0.2)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
@@ -53,6 +58,7 @@ PODS:
   - TSMessages (0.9.12):
     - HexColors (~> 2.2.0)
   - UIAlertView-Blocks (1.0)
+  - UICountingLabel (1.2.0)
   - UITextView+Placeholder (1.2.0)
   - UIView+Borders (0.0.2)
   - UMengAnalytics (4.1.0)
@@ -83,8 +89,10 @@ DEPENDENCIES:
   - MTLManagedObjectAdapter
   - MZTimerLabel
   - NSDate+TimeAgo
+  - PNChart
   - pop (~> 1.0)
   - QBImagePickerController
+  - Realm
   - SevenSwitch (~> 1.4)
   - SKTagView
   - SVSegmentedControl
@@ -122,9 +130,11 @@ SPEC CHECKSUMS:
   MTLManagedObjectAdapter: 631a53432675dcf03a9d90624afb3cececf54631
   MZTimerLabel: cd9bfb9304540ef2a9e163384fca9c978f0dbf83
   NSDate+TimeAgo: 35601c619b2d59290055e4fe76e61d97677a2360
+  PNChart: 84774d225c2126ded6c93d4dbe6ae98c3a73c2d2
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SevenSwitch: e992e56e2e7f401eb00538b9fa92bf848bacbe27
   SKTagView: 59cdadcd16e4a09300746ad1811a72371e1327f7
@@ -133,10 +143,13 @@ SPEC CHECKSUMS:
   TOWebViewController: a29908019f7e0e0f8eccfab8a1ee8dcdf4fc5aac
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
   UIAlertView-Blocks: 7904744fca618afbd2ec646608924f5e69d5acd1
+  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   UIView+Borders: d632c8bef679e7f98e913b569e972858742841ce
   UMengAnalytics: 19b28253793d77dff10fb7d502faad1fb6b8ce4a
   UMengFeedback: 5283cc0e324dffca4dd54c4abb3cbded56487817
   ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 6e14afb8c3a682b520ecd505fdeb747a05824084
+
+COCOAPODS: 1.0.1

@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1000,
+    "name": "房租",
+    "remarks": "",
+    "iconName": "icon_jjwy_fz"
+  },
+  {
+    "id": 1001,
+    "name": "餐饮",
+    "remarks": "",
+    "iconName": "icon_spjs"
+  },
+  {
+    "id": 1002,
+    "name": "交通",
+    "remarks": "",
+    "iconName": "icon_xcjt_ggjt"
+  },
+  {
+    "id": 1003,
+    "name": "居家",
+    "remarks": "",
+    "iconName": "icon_jjwy_rcyp"
+  },
+  {
+    "id": 1004,
+    "name": "零食",
+    "remarks": "",
+    "iconName": "icon_spjs_sgls"
+  },
+  {
+    "id": 1005,
+    "name": "服饰",
+    "remarks": "",
+    "iconName": "icon_yfsp_yfkz"
+  },
+  {
+    "id": 1006,
+    "name": "医疗",
+    "remarks": "",
+    "iconName": "icon_ylbj_ypf"
+  },
+  {
+    "id": 1007,
+    "name": "美容",
+    "remarks": "",
+    "iconName": "icon_ylbj_mrf"
+  },
+  {
+    "id": 1008,
+    "name": "通讯",
+    "remarks": "",
+    "iconName": "icon_jltx_sjf"
+  },
+  {
+    "id": 1009,
+    "name": "烟酒茶",
+    "remarks": "",
+    "iconName": "icon_spjs_yjc"
+  },
+  {
+    "id": 1010,
+    "name": "旅游",
+    "remarks": "",
+    "iconName": "icon_xxyl_lydj"
+  },
+  {
+    "id": 1011,
+    "name": "电子",
+    "remarks": "",
+    "iconName": "icon_xxjx_smzb"
+  },
+  {
+    "id": 1012,
+    "name": "水电气",
+    "remarks": "",
+    "iconName": "icon_jjwy_sdmq"
+  },
+  {
+    "id": 1013,
+    "name": "宠物",
+    "remarks": "",
+    "iconName": ""
+  },
+  {
+    "id": 1014,
+    "name": "转账",
+    "remarks": "",
+    "iconName": ""
+  },
+  {
+    "id": 1015,
+    "name": "还信用卡",
+    "remarks": "",
+    "iconName": "icon_jrbx_ajhk"
+  },
+  {
+    "id": 1016,
+    "name": "借出",
+    "remarks": "",
+    "iconName": ""
+  },
+  {
+    "id": 1017,
+    "name": "健身",
+    "remarks": "",
+    "iconName": "icon_xxyl_ydjs"
+  },
+  {
+    "id": 1018,
+    "name": "学习",
+    "remarks": "",
+    "iconName": "icon_xxjx_sbzz"
+  }
+]

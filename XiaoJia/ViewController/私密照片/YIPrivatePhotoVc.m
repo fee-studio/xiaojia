@@ -12,7 +12,6 @@
 #import "YIPhotoListCell.h"
 #import "YIPrivateSettingVc.h"
 #import "YIPhotoCollectionViewLayout.h"
-#import "YIProgressHUD.h"
 #import "YIPhotoPreviewViewController.h"
 #import "YITransitionPhotoListToPreview.h"
 

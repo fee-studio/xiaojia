@@ -380,11 +380,16 @@ target 'XiaoJia' do
 #    pod 'YWFeedbackFMWK'
 
 ##################################################
-
   pod 'GPUImage'
 
 # https://github.com/alskipp/ASValueTrackingSlider
   pod 'ASValueTrackingSlider'
+
+# https://github.com/kevinzhow/PNChart
+  pod 'PNChart'
+  
+# https://realm.io/cn/docs/objc/latest/#section-2
+  pod 'Realm'
 
 end
 

@@ -1,0 +1,70 @@
+[
+  {
+    "name" : "房租",
+    "icon_name" : "icon_jjwy_fz"
+  },
+  {
+    "name" : "水电气",
+    "icon_name" : "icon_jjwy_sdmq"
+  },
+  {
+    "name" : "电子",
+    "icon_name" : "icon_xxjx_smzb"
+  },
+  {
+    "name" : "旅游",
+    "icon_name" : "icon_xxyl_lydj"
+  },
+  {
+    "name" : "餐饮",
+    "icon_name" : "icon_spjs"
+  },
+  {
+    "name" : "交通",
+    "icon_name" : "icon_xcjt_ggjt"
+  },
+  {
+    "name" : "零食",
+    "icon_name" : "icon_spjs_sgls"
+  },
+  {
+    "name" : "居家",
+    "icon_name" : "icon_jjwy_rcyp"
+  },
+  {
+    "name" : "医疗",
+    "icon_name" : "icon_ylbj_ypf"
+  },
+  {
+    "name" : "通讯",
+    "icon_name" : "icon_jltx_sjf"
+  },
+  {
+    "name" : "健身",
+    "icon_name" : "icon_xxyl_ydjs"
+  },
+  {
+    "name" : "美容",
+    "icon_name" : "icon_ylbj_mrf"
+  },
+  {
+    "name" : "服饰",
+    "icon_name" : "icon_yfsp_yfkz"
+  },
+  {
+    "name" : "烟酒茶",
+    "icon_name" : "icon_spjs_yjc"
+  },
+  {
+    "name" : "娱乐",
+    "icon_name" : "icon_xxyl_xxwl"
+  },
+  {
+    "name" : "学习",
+    "icon_name" : "icon_xxjx_sbzz"
+  },
+  {
+    "name" : "按揭还款",
+    "icon_name" : "icon_jrbx_ajhk"
+  }
+]

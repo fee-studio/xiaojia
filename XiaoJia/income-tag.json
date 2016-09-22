@@ -1,0 +1,50 @@
+[
+  {
+    "id": 2000,
+    "name": "工资",
+    "remarks": "",
+    "iconName": "icon_zysr_gzsr"
+  },
+  {
+    "id": 2001,
+    "name": "利息",
+    "remarks": "",
+    "iconName": "icon_zysr_lxsr"
+  },
+  {
+    "id": 2002,
+    "name": "奖金",
+    "remarks": "",
+    "iconName": "icon_zysr_jjsr"
+  },
+  {
+    "id": 2003,
+    "name": "经营所得",
+    "remarks": "",
+    "iconName": ""
+  },
+  {
+    "id": 2004,
+    "name": "兼职",
+    "remarks": "",
+    "iconName": "icon_zysr_jzsr"
+  },
+  {
+    "id": 2005,
+    "name": "贷款",
+    "remarks": "",
+    "iconName": "icon_qtsr_xykhk"
+  },
+  {
+    "id": 2006,
+    "name": "借款",
+    "remarks": "",
+    "iconName": ""
+  },
+  {
+    "id": 2007,
+    "name": "其他",
+    "remarks": "",
+    "iconName": ""
+  }
+]

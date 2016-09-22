@@ -19,7 +19,7 @@
     [hud show:YES];
     hud.labelText = text;
     // 1秒后隐藏
-    [hud hide:YES afterDelay:1.f];
+    [hud hide:YES afterDelay:2.f];
 }
 
 @end

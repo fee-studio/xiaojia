@@ -71,7 +71,14 @@
     self.layer.masksToBounds = YES;
 }
 
+- (void)borderStyle:(CGFloat)borderWidth {
+    self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.layer.borderWidth = borderWidth;
+    self.layer.masksToBounds = YES;
+}
+
 - (void)circleStyle {
+    self.clipsToBounds = YES;
     self.layer.cornerRadius = self.width / 2.f;
     self.layer.masksToBounds = YES;
 }
