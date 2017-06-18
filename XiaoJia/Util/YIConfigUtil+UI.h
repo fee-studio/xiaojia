@@ -13,26 +13,26 @@
 
 
 // 2,应用中UI的配色
-#define kAppColorMain        ([UIColor colorWithHexString:@"38c4c5"])
+#define kAppColorMain         ([UIColor colorWithHexString:@"38c4c5"])
 
 #define kAppColorWhite        ([UIColor colorWithHexString:@"ffffff"])
-#define kAppColorGray        ([UIColor colorWithHexString:@"999999"])
+#define kAppColorGray         ([UIColor colorWithHexString:@"999999"])
 #define kAppColorLightGray    ([UIColor colorWithHexString:@"eeeeee"])
 #define kAppColorBlack        ([UIColor darkGrayColor])
 
-#define kAppColorRed        ([UIColor watermelonColor])
-#define kAppColorOrange        ([UIColor cantaloupeColor])
-#define kAppColorYellow        ([UIColor buttermilkColor])
-#define kAppColorGreen        ([UIColor pastelGreenColor])
-#define kAppColorCyan        ([UIColor turquoiseColor])
-#define kAppColorBlue        ([UIColor skyBlueColor])
-#define kAppColorPurple        ([UIColor coolPurpleColor])
+#define kAppColorRed			([UIColor watermelonColor])
+#define kAppColorOrange			([UIColor cantaloupeColor])
+#define kAppColorYellow			([UIColor buttermilkColor])
+#define kAppColorGreen			([UIColor pastelGreenColor])
+#define kAppColorCyan			([UIColor turquoiseColor])
+#define kAppColorBlue			([UIColor skyBlueColor])
+#define kAppColorPurple			([UIColor coolPurpleColor])
 
-#define kAppColorBg            ([UIColor  groupTableViewBackgroundColor])
+#define kAppColorBg				([UIColor  groupTableViewBackgroundColor])
 
-#define kAppColorTextDeep    ([UIColor darkGrayColor])
-#define kAppColorTextMid    ([UIColor  colorWithHexString:@"999999"])
-#define kAppColorTextLight    ([UIColor  colorWithHexString:@"cccccc"])
+#define kAppColorTextDeep		([UIColor darkGrayColor])
+#define kAppColorTextMid		([UIColor  colorWithHexString:@"999999"])
+#define kAppColorTextLight		([UIColor  colorWithHexString:@"cccccc"])
 
 // 3,应用中常用的字体大小
 #define kAppHugeFont        ([UIFont systemFontOfSize:20])

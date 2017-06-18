@@ -68,9 +68,9 @@
  */
 #import <CoreMotion/CoreMotion.h>
 
-#import <WXOpenIMSDKFMWK/YWFMWK.h>
-#import <WXOUIModule/YWUIFMWK.h>
-#import <YWFeedbackServiceFMWK/YWFeedbackServiceFMWK.h>
+//#import <WXOpenIMSDKFMWK/YWFMWK.h>
+//#import <WXOUIModule/YWUIFMWK.h>
+//#import <YWFeedbackServiceFMWK/YWFeedbackServiceFMWK.h>
 
 #import "YIProgressHUD.h"
 

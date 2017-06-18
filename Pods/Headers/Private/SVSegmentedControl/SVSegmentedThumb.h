@@ -1,0 +1,1 @@
+../../../SVSegmentedControl/SVSegmentedControl/SVSegmentedThumb.h

@@ -81,13 +81,13 @@
     "id": 1013,
     "name": "宠物",
     "remarks": "",
-    "iconName": ""
+    "iconName": "icon_xxyl_cwbb"
   },
   {
     "id": 1014,
     "name": "转账",
     "remarks": "",
-    "iconName": ""
+    "iconName": "icon_jrbx_lxzc"
   },
   {
     "id": 1015,
@@ -99,7 +99,7 @@
     "id": 1016,
     "name": "借出",
     "remarks": "",
-    "iconName": ""
+    "iconName": "icon_qtzx_qtzc"
   },
   {
     "id": 1017,
@@ -112,5 +112,17 @@
     "name": "学习",
     "remarks": "",
     "iconName": "icon_xxjx_sbzz"
+  },
+  {
+    "id": 1019,
+    "name": "保险",
+    "remarks": "",
+    "iconName": "icon_jrbx_bxzc"
+  },
+  {
+    "id": 1020,
+    "name": "其他",
+    "remarks": "",
+    "iconName": "icon_rqwl_xjjz"
   }
 ]

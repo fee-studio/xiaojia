@@ -11,14 +11,11 @@
 #import "YITextField.h"
 
 
-@interface YIAddBillVc () <UICollectionViewDataSource,
-        UICollectionViewDelegate,
-        UICollectionViewDelegateFlowLayout,
+@interface YIAddBillVc () <
         YIBillItemsCvDelegate,
         FrequencyViewDelegate> {
-
-    UICollectionView *cvBillItems;
-    YIBillItemsCv *billItemsCv;
+			
+			
     YITextField *tfName;
 	YITextField *tfMoney;
     FrequencyView *viewFrequency;
@@ -28,12 +25,15 @@
 	float curMoney;
 }
 
+@property (nonatomic, weak) YIBillItemsCv *billItemsCv;
+
 @end
 
 @implementation YIAddBillVc
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.title = @"添加费用项";
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithTitle:@"搞定"
@@ -48,6 +48,11 @@
 
 // 搞定
 - (void)commitBillItemAction:(UIBarButtonItem *)bbi {
+	if (curBillItem == nil || curFrequency == nil || curMoney <= 0.f) {
+		[TSMessage showNotificationWithTitle:@"请完善各项信息并保证费用大于0!" type:TSMessageNotificationTypeWarning];
+		return;
+	}
+	
 	if ([curBillItem isKindOfClass:[YIExpensesTag class]]) {
 		YIExpenses *expenses = [[YIExpenses alloc] init];
 		expenses.expensesTag = (YIExpensesTag *)curBillItem;
@@ -79,7 +84,7 @@
     segmentedControl.selectedSegmentIndex = 0;
     self.navigationItem.titleView = segmentedControl;
 
-    billItemsCv = [[YIBillItemsCv alloc] init];
+    YIBillItemsCv *billItemsCv = [[YIBillItemsCv alloc] init];
     billItemsCv.delegate = self;
     RLMResults *results = [YIExpensesTag allObjects];
     billItemsCv.items = results;
@@ -88,13 +93,15 @@
         make.top.equalTo(billItemsCv.superview);
         make.left.equalTo(billItemsCv.superview);
         make.width.equalTo(billItemsCv.superview);
-        make.height.equalTo(@(mScreenWidth / 5 * 2));
+        make.height.equalTo(@(mScreenWidth / 5 * 2 + 10));
     }];
+	self.billItemsCv = billItemsCv;
 
     tfName = [[YITextField alloc] init];
     tfName.enabled = NO;
     tfName.backgroundColor = kAppColorWhite;
-//	tfName.placeholder = @"设置此阶段的名字";
+	tfName.textColor = kAppColorTextDeep;
+	[tfName setFont:[UIFont boldSystemFontOfSize:20]];
     [self.view addSubview:tfName];
     [tfName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(billItemsCv.mas_bottom).offset(1);
@@ -105,6 +112,9 @@
 	tfMoney = [[YITextField alloc] init];
 	tfMoney.backgroundColor = kAppColorWhite;
 	tfMoney.placeholder = @"费用";
+	tfMoney.textColor = [UIColor salmonColor];
+	[tfMoney setFont:[UIFont boldSystemFontOfSize:20]];
+	tfMoney.keyboardType = UIKeyboardTypeNumberPad;
 	[tfMoney addTarget:self action:@selector(curMoneyChanged:) forControlEvents:UIControlEventEditingChanged];
 	[self.view addSubview:tfMoney];
 	[tfMoney mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -117,7 +127,6 @@
 
     viewFrequency = [[FrequencyView alloc] init];
     viewFrequency.delegate = self;
-	[viewFrequency loadUI];
     [self.view addSubview:viewFrequency];
     [viewFrequency mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(tfName.mas_bottom);
@@ -125,11 +134,11 @@
 		make.width.equalTo(viewFrequency.superview);
 		make.height.equalTo(@(mScreenWidth / 6.0));
 	}];
+	[viewFrequency loadUI];
 }
 
 - (void)curMoneyChanged:(YITextField *)textfield {
 	curMoney = [textfield.text floatValue];
-	NSLog(@"cur money = %f", curMoney);
 }
 
 #pragma mark - YIBillItemsCvDelegate
@@ -147,9 +156,6 @@
         tfName.text = tag.name;
 		curBillItem = tag;
     }
-
-	
-    // todo ...总觉得这样设计不太好啊。
 }
 
 #pragma mark - FrequencyViewDelegate
@@ -163,11 +169,23 @@
 - (void)segmentedControlOnChanged:(UISegmentedControl *)segmentedControl {
     if (segmentedControl.selectedSegmentIndex == 0) {
         RLMResults *results = [YIExpensesTag allObjects];
-        billItemsCv.items = results;
+        _billItemsCv.items = results;
+		
     } else if (segmentedControl.selectedSegmentIndex == 1) {
         RLMResults *results = [YIIncomeTag allObjects];
-        billItemsCv.items = results;
+        _billItemsCv.items = results;
     }
+	
+	// 重设默认值
+	tfName.text = @"";
+	curBillItem = nil;
+	
+	tfMoney.text = @"";
+	curMoney = 0.f;
+}
+
+- (void)dealloc {
+	_billItemsCv = nil;
 }
 
 @end
@@ -188,7 +206,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        frequencys = [YIFrequency allObjects];        
+        frequencys = [YIFrequency allObjects];
     }
 
     return self;
@@ -200,7 +218,6 @@
     [viewFrequency mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(viewFrequency.superview);
     }];
-//    NSArray *frequencys = @[@"只一次", @"每天", @"每周", @"每半月", @"每月", @"每年"];
 
     UIView *lastView;
     for (NSUInteger i = 0; i < frequencys.count; ++i) {
@@ -232,7 +249,9 @@
     }
 
     curBtn = [viewFrequency viewWithTag:1000+0];
-    [self frequencyBtnAction:curBtn];
+	if (curBtn) {
+		[self frequencyBtnAction:curBtn];
+	}
 }
 
 - (void)frequencyBtnAction:(UIButton *)button {

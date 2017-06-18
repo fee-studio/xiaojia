@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	self.title = @"支出收入列表";
 	self.edgesForExtendedLayout = UIRectEdgeNone;
 	
 	[self loadData];

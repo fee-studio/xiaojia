@@ -72,7 +72,7 @@
 		[self.navigationController pushViewController:vc animated:YES];
 	} else {
 		if (index == 1002) {
-			
+/*
 			__weak typeof(self) weakSelf = self;
 			[YWAnonFeedbackService makeFeedbackConversationWithCompletionBlock:^(YWFeedbackConversation *conversation, NSError *error) {
 				if ( conversation != nil ) {
@@ -106,7 +106,7 @@
 //																		 type:SPMessageNotificationTypeError];
 				}
 			}];
-			 
+		*/	 
 		} else {
 			
 		}

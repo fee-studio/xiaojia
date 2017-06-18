@@ -30,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+	self.title = @"家庭列表";
 //    [[YIRealmUtil instance] buildDefaultData];
     [[YIRealmUtil instance] initRealm];
 

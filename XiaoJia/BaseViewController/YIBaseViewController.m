@@ -7,9 +7,14 @@
 //
 
 #import "YIMessagesViewController.h"
+#import <YWFeedbackFMWK/YWFeedbackKit.h>
+#import <YWFeedbackFMWK/YWFeedbackViewController.h>
 
+static NSString * const kAppKey = @"23437490";
 
 @interface YIBaseViewController ()
+
+@property (nonatomic, strong) YWFeedbackKit *feedbackKit;
 
 @end
 
@@ -194,6 +199,7 @@
 //    YIMessagesViewController *vc = [YIMessagesViewController messagesViewController];
 //    [self.navigationController pushViewController:vc animated:YES];
 
+	 /* todo
 	// 阿里百川反馈
 	__weak typeof(self) weakSelf = self;
 	[YWAnonFeedbackService makeFeedbackConversationWithCompletionBlock:^(YWFeedbackConversation *conversation, NSError *error) {
@@ -203,7 +209,34 @@
 		} else {
 		}
 	}];
+	  */
+
+
+    __weak typeof(self) weakSelf = self;
+    [self.feedbackKit makeFeedbackViewControllerWithCompletionBlock:^(YWFeedbackViewController *viewController, NSError *error) {
+        if (viewController != nil) {
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+            [weakSelf presentViewController:nav animated:YES completion:nil];
+
+            [viewController setCloseBlock:^(UIViewController *aParentController){
+                [aParentController dismissViewControllerAnimated:YES completion:nil];
+            }];
+        } else {
+            NSString *title = error.userInfo[@"msg"] ?:@"接口调用失败，请保持网络通畅！";
+            [TSMessage showNotificationWithTitle:title
+                                            type:TSMessageNotificationTypeError];
+        }
+    }];
 }
+
+#pragma mark getter
+- (YWFeedbackKit *)feedbackKit {
+    if (!_feedbackKit) {
+        _feedbackKit = [[YWFeedbackKit alloc] initWithAppKey:kAppKey];
+    }
+    return _feedbackKit;
+}
+
 
 #pragma mark -
 

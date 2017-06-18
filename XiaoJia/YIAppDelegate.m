@@ -15,6 +15,8 @@
 #import "YISplashScreen.h"
 #import "YIInitUtil.h"
 #import "YIAddBillVc.h"
+#import "YIRealmUtil.h"
+
 
 @interface YIAppDelegate () <CLLocationManagerDelegate,
         UIViewControllerTransitioningDelegate,
@@ -86,8 +88,11 @@
     // todo ...
 //	return [self loadTempViewController];
 
+	/* todo 暂时不用这个了
     [self callThisInDidFinishLaunching];
+	 */
 
+    /*
     NSString *myDeviceId = [CloudPushSDK getDeviceId];
     NSLog(@"my deivce id === %@", myDeviceId);
 
@@ -101,7 +106,7 @@
     // 同时监听网络连接
     [self listenerOnChannelOpened];
     [self registerMsgReceive];
-
+     */
 
 
 
@@ -145,24 +150,25 @@
 #pragma mark 初始化服务
 
 - (void)init_tae {
-
+/*
     //sdk初始化
 //	[[ALBBSDK sharedInstance] setDebugLogOpen:TRUE];// 测试时打开
     [[ALBBSDK sharedInstance] asyncInit:^{
         NSLog(@"======================> 初始化成功");
-        /*
-         VIP
-         在后台做推送测试的时候，
-         注意不是用这个device id,
-         在log里面找一个叫realDeviceId的才可以测试成功。
-         好郁闷~
-         不过，
-         后来发现这个也可以用。操
-         */
+
+//         VIP
+//         在后台做推送测试的时候，
+//         注意不是用这个device id,
+//         在log里面找一个叫realDeviceId的才可以测试成功。
+//         好郁闷~
+//         不过，
+//         后来发现这个也可以用。操
+
         NSLog(@"======================> DeviceID：%@", [CloudPushSDK getDeviceId]);
     }                           failure:^(NSError *error) {
         NSLog(@"======================> 初始化失败:%@", error);
     }];
+    */
 }
 
 - (void)listenerOnChannelOpened {
@@ -181,7 +187,9 @@
         // iOS < 8 Notifications
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     }
+    /*
     [CloudPushSDK handleLaunching:launchOptions]; // 作为 apns 消息统计
+     */
 }
 
 #pragma mark 注册接收CloudChannel推送下来的消息
@@ -218,14 +226,12 @@
  *  您需要在-[AppDelegate application:didFinishLaunchingWithOptions:]中第一时间设置此回调
  *  在IMSDK截获到Push通知并需要您处理Push时，IMSDK会自动调用此回调
  */
+/* todo
 - (void)exampleHandleAPNSPush {
 
     __weak typeof(self) weakSelf = self;
 
     [[[YWAPI sharedInstance] getGlobalPushService] addHandlePushBlockV4:^(NSDictionary *aResult, BOOL *aShouldStop) {
-
-        NSLog(@"冯夷夷 handle apns push");
-
         BOOL isLaunching = [aResult[YWPushHandleResultKeyIsLaunching] boolValue];
         UIApplicationState state = [aResult[YWPushHandleResultKeyApplicationState] integerValue];
         NSString *conversationId = aResult[YWPushHandleResultKeyConversationId];
@@ -240,51 +246,13 @@
             return;
         }
 
-//		if (isLaunching) {
-//			/// 用户划开Push导致app启动
-//			
-//			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//				if ([self exampleIsPreLogined]) {
-//					/// 说明已经预登录成功
-//					YWConversation *conversation = nil;
-//					if (conversationClass == [YWP2PConversation class]) {
-//						conversation = [YWP2PConversation fetchConversationByConversationId:conversationId creatIfNotExist:YES baseContext:weakSelf.ywIMKit.IMCore];
-//					} else if (conversationClass == [YWTribeConversation class]) {
-//						conversation = [YWTribeConversation fetchConversationByConversationId:conversationId creatIfNotExist:YES baseContext:weakSelf.ywIMKit.IMCore];
-//					}
-//					if (conversation) {
-//						[weakSelf exampleOpenConversationViewControllerWithConversation:conversation fromNavigationController:[weakSelf conversationNavigationController]];
-//					}
-//				}
-//			});
-//			
-//		} else {
-//			/// app已经启动时处理Push
-//			
-//			if (state != UIApplicationStateActive) {
-//				if ([self exampleIsPreLogined]) {
-//					/// 说明已经预登录成功
-//					YWConversation *conversation = nil;
-//					if (conversationClass == [YWP2PConversation class]) {
-//						conversation = [YWP2PConversation fetchConversationByConversationId:conversationId creatIfNotExist:YES baseContext:weakSelf.ywIMKit.IMCore];
-//					} else if (conversationClass == [YWTribeConversation class]) {
-//						conversation = [YWTribeConversation fetchConversationByConversationId:conversationId creatIfNotExist:YES baseContext:weakSelf.ywIMKit.IMCore];
-//					}
-//					if (conversation) {
-//						[weakSelf exampleOpenConversationViewControllerWithConversation:conversation fromNavigationController:[weakSelf conversationNavigationController]];
-//					}
-//				}
-//			} else {
-//				/// 应用处于前台
-//				/// 建议不做处理，等待IM连接建立后，收取离线消息。
-//			}
-//		}
     }                                                            forKey:self.description ofPriority:YWBlockPriorityDeveloper];
 }
-
+ */
 /**
  *  程序完成启动，在appdelegate中的 application:didFinishLaunchingWithOptions:一开始的地方调用
  */
+/* todo
 - (void)callThisInDidFinishLaunching {
     // 云推送
 #if DEBUG
@@ -305,10 +273,12 @@
         [av show];
     }
 }
+ */
 
 /**
  *  初始化示例代码
  */
+/* todo
 - (BOOL)exampleInit; {
     /// 开启日志
 //    [[YWAPI sharedInstance] setLogEnabled:YES];
@@ -458,6 +428,7 @@
 
     return YES;
 }
+ */
 
 
 - (BOOL)loadTempViewController {
@@ -783,8 +754,11 @@
 //	YIMosaicsVc *vc = [[YIMosaicsVc alloc] init];
 //	YIBlurVc *vc = [[YIBlurVc alloc] init];
 //	UIViewController *vc = [UIViewController new];
+	
+//	[[YIRealmUtil instance] initRealm];
+//    [[YIRealmUtil instance] buildDefaultData];
 //    YIAddBillVc *vc = [[YIAddBillVc alloc] init]; // todo ...
-
+	
     YIIndexVc *vc = [[YIIndexVc alloc] init]; // todo final correct
     YIBaseNavigationController *mainNc = [[YIBaseNavigationController alloc] initWithRootViewController:vc];
     self.window = [[UIWindow alloc] initWithFrame:mScreenBounds];
@@ -951,8 +925,10 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     mGlobalData.deviceToken = [deviceToken hexadecimalString];
     NSLog(@"推送注册成功: Device Token is %@", mGlobalData.deviceToken);
+    /*
     // 关键
     [CloudPushSDK registerDevice:deviceToken];
+     */
 
     // 友盟
     [UMessage registerDeviceToken:deviceToken];
@@ -990,7 +966,9 @@
     // 打印自定义参数
     NSLog(@"自定义参数为 ： %@", userInfo);
 
+    /*
     [CloudPushSDK handleReceiveRemoteNotification:userInfo];
+     */
 
 }
 

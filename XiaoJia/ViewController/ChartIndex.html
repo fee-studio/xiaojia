@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<meta charset="utf-8">-->
+    <!--<meta content="text/html; charset=utf-8" http-equiv="Content-Type">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">-->
+    <!--<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.5; user-scalable=1"/>-->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="language" content="en"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=4.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <title>家庭经济收入支出图</title>
+    <script src="Chart.js"></script>
+    <script src="jquery-3.1.1.js"></script>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>-->
+    <style type="text/css">
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+
+    <script>
+        function setupWebViewJavascriptBridge(callback) {
+            if (window.WebViewJavascriptBridge) {
+                return callback(WebViewJavascriptBridge);
+            }
+            if (window.WVJBCallbacks) {
+                return window.WVJBCallbacks.push(callback);
+            }
+            window.WVJBCallbacks = [callback];
+            var WVJBIframe = document.createElement('iframe');
+            WVJBIframe.style.display = 'none';
+            WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+            document.documentElement.appendChild(WVJBIframe);
+            setTimeout(function () {
+                document.documentElement.removeChild(WVJBIframe)
+            }, 0)
+        }
+    </script>
+</head>
+
+<body>
+
+<script>
+    var config;
+
+    var randomScalingFactor = function () {
+        return Math.round(Math.random() * 100);
+    };
+    var randomColorFactor = function () {
+        return Math.round(Math.random() * 255);
+    };
+    var randomColor = function (opacity) {
+        return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (opacity || '.3') + ')';
+    };
+
+    function addChartLine(config) {
+        var canvas = document.createElement("canvas");
+        canvas.width = 320;
+        canvas.height = 450;
+        canvas.style.border = "1px solid #aaa";
+        canvas.style.marginTop = "5px";
+        document.body.appendChild(canvas);
+        new Chart(canvas.getContext("2d"), config);
+    }
+
+    setupWebViewJavascriptBridge(function (bridge) {
+        bridge.callHandler('oc-get-chart-config', {'key': 'value'}, function responseCallback(responseData) {
+            console.log("JS received response:", responseData);
+            config = responseData;
+
+            $.each(config, function (i, phaseConfig) {
+                $.each(phaseConfig, function (i, singleConfig) {
+                    $.each(singleConfig.data.datasets, function (i, dataset) {
+                        dataset.borderColor = randomColor(0.4);
+                        dataset.backgroundColor = randomColor(0.5);
+                        dataset.pointBorderColor = randomColor(0.7);
+                        dataset.pointBackgroundColor = randomColor(0.5);
+                        dataset.pointBorderWidth = 0.5;
+                        dataset.pointRadius = 5;
+                        dataset.pointHoverRadius = 6;
+                        dataset.pointHoverBackgroundColor = "#f44";
+                        dataset.borderWidth = 1;
+                    });
+                });
+
+                addChartLine(phaseConfig["line_total"]);
+//                addChartLine(phaseConfig["line_balance_amount"]);
+//                addChartLine(phaseConfig["line_single_expenses"]);
+//                addChartLine(phaseConfig["line_single_income"]);
+
+                if (i == config.length - 1) {
+                    addChartLine(phaseConfig["line_total_balance"]);
+                }
+            });
+
+        });
+    });
+
+
+</script>
+</body>
+
+</html>

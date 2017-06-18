@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.title = @"添加家庭名";
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
     UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消"
@@ -58,7 +59,7 @@
     textField = [[YITextField alloc] init];
     [textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     textField.backgroundColor = kAppColorWhite;
-    textField.placeholder = @"Family 1";
+    textField.placeholder = @"请输入您家庭的代号，如：FYY的家庭";
     [self.view addSubview:textField];
     [textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(textField.superview);

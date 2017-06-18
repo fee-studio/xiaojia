@@ -61,7 +61,7 @@
 
     UILabel *sloganLbl = [UILabel new];
     sloganLbl.backgroundColor = [UIColor clearColor];
-    sloganLbl.text = @"未来世界，因小而美";
+    sloganLbl.text = @"未来世界，因你而美";
     sloganLbl.font = [UIFont systemFontOfSize:16];
     sloganLbl.textColor = kAppColorWhite;
     [launchView addSubview:sloganLbl];

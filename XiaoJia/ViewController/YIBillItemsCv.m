@@ -157,10 +157,11 @@
 	UIImageView *ivIcon;
 }
 
+
 //@property(nonatomic, strong) UIImage *icon;
 //@property(nonatomic, strong) NSString *title;
 
-//@property(nonatomic, weak) UIImageView *ivTitle;
+//@property(nonatomic, weak) UIImageView *ivIcon;
 //@property(nonatomic, weak) UILabel *lblTitle;
 
 - (void)setupCell:(NSString *)title;
@@ -187,10 +188,10 @@
         make.height.equalTo(@30);
         make.centerX.equalTo(ivIcon.superview);
     }];
+//	self.ivIcon = ivIcon;
 
     lblTitle = [[UILabel alloc] init];
-    lblTitle.font = kAppMidFont;
-//    lblTitle.backgroundColor = [UIColor blueberryColor];
+	lblTitle.font = kAppSmlFont;
     lblTitle.textColor = kAppColorGray;
     lblTitle.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:lblTitle];
@@ -201,6 +202,7 @@
         make.bottom.equalTo(lblTitle.superview).offset(-5);
         make.centerX.equalTo(ivIcon.superview);
     }];
+//	self.lblTitle = lblTitle;
 }
 
 - (void)setupCell:(RLMObject *)object {
@@ -218,15 +220,16 @@
 //	self.backgroundColor = [UIColor randomColor];
 }
 
-
 @end
 
 
 #pragma mark -
 
 @interface YIBillItemsCv () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
-
-@property(nonatomic, weak) UICollectionView *collectionView;
+{
+	NSIndexPath *preSelectedIndexPath;
+}
+@property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, weak) UIPageControl *pageControl;
 
 @end
@@ -253,7 +256,7 @@
 - (void)loadUI {
     UICollectionViewFlowLayout *layout = [[YICollectionViewHorizontalFlowLayout alloc] init];
     UICollectionView *cv = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-    cv.backgroundColor = kAppColorWhite;
+	cv.backgroundColor = kAppColorWhite;
     cv.dataSource = self;
     cv.delegate = self;
     cv.pagingEnabled = YES;
@@ -263,6 +266,7 @@
     [self addSubview:cv];
     [cv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(cv.superview);
+		make.bottom.equalTo(cv.superview).offset(-10);
     }];
 	self.collectionView = cv;
 
@@ -272,7 +276,7 @@
 	pcContainer.layer.masksToBounds = YES;
     [self addSubview:pcContainer];
     [pcContainer mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(pcContainer.superview).offset(-1);
+		make.bottom.equalTo(pcContainer.superview);
         make.centerX.equalTo(pcContainer.superview);
         make.height.equalTo(@10);
     }];
@@ -290,25 +294,10 @@
     self.pageControl = pc;
 }
 
-int i = 0;
 - (void)layoutSubviews {
-//	float w = _collectionView.contentSize.width;
-//	float ww = _collectionView.frame.size.width;
-//	self.pageControl.numberOfPages = (int)floor(_collectionView.contentSize.width / _collectionView.frame.size.width) + 1;
-
     NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
     NSInteger pages = (NSInteger) ceil(itemCount / 10.0);
     self.pageControl.numberOfPages = pages;
-
-//	float width = self.pageControl.frame.size.width;	
-//	NSLog(@"width  ==  %f", width);
-//    [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(@(width + 10.f));
-//    }];
-//	if (i <= 2) {
-//		[self layoutIfNeeded];
-//		i++;
-//	}
 	
 	[super layoutSubviews];
 }
@@ -336,31 +325,37 @@ int i = 0;
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     YIBillItemsCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([YIBillItemsCollectionCell class])
                                               forIndexPath:indexPath];
-
-//    cell.backgroundColor = kAppColorMain;
+	if (preSelectedIndexPath && indexPath.item == preSelectedIndexPath.item) {
+		cell.selected = YES;
+	} else {
+		cell.selected = NO;
+	}
 	[cell setupCell:self.items[indexPath.item]];
-
-//    static NSString *identifierCell = @"Cell";
-//    CollectionCell *cell = nil;
-//    if (indexPath.item >= 10) {
-//        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CellWhite"
-//                                                         forIndexPath:indexPath];
-//    } else {
-//        cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierCell
-//                                                         forIndexPath:indexPath];
-//        cell.titleLabel.text =
-//                [NSString stringWithFormat:@"第%ld个礼物", (long)indexPath.row];
-//    }
+	cell.selectedBackgroundView = [[UIImageView alloc] initWithImage: [UIImage imageWithColor:kAppColorLightGray]];
+	cell.backgroundView = [[UIImageView alloc] initWithImage: [UIImage imageWithColor:[UIColor clearColor]]];
 
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath; {
-	NSLog(@"%d", indexPath.item);
+	// 选中的效果处理
+	UICollectionViewCell *preCell = [collectionView cellForItemAtIndexPath:preSelectedIndexPath];
+	preCell.selected = NO;
+	UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+	cell.selected = YES;
+	preSelectedIndexPath = indexPath;
+	
 	if ([_delegate respondsToSelector:@selector(didSelectBillItem:)]) {
 		[_delegate didSelectBillItem:self.items[indexPath.item]];
 	}
 }
 
+//- (void)dealloc {
+//	self.collectionView.delegate = nil;
+//	self.collectionView.dataSource = nil;
+//	self.collectionView = nil;
+//
+//	NSLog(@"items collection view dealloc");
+//}
 
 @end

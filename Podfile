@@ -8,6 +8,9 @@ platform :ios, '8.0'
 # source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'
 # source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecsMirror.git'
 
+source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'
+source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecsMirror.git'
+
 target 'XiaoJia' do
 # use_frameworks!
 
@@ -379,6 +382,9 @@ target 'XiaoJia' do
 # pod 'YWFeedbackFMWK', :git => 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'
 #    pod 'YWFeedbackFMWK'
 
+# https://baichuan.taobao.com/docs/doc.htm?spm=a3c0d.7629140.0.0.nW0FiS&treeId=118&articleId=105671&docType=1
+  pod 'YWFeedbackFMWK', '~> 2.0.3.1'
+
 ##################################################
   pod 'GPUImage'
 
@@ -390,6 +396,9 @@ target 'XiaoJia' do
   
 # https://realm.io/cn/docs/objc/latest/#section-2
   pod 'Realm'
+
+# https://github.com/marcuswestin/WebViewJavascriptBridge
+  pod 'WebViewJavascriptBridge', '~> 5.0'
 
 end
 

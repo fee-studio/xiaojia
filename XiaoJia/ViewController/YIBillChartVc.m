@@ -38,7 +38,6 @@
 }
 
 - (void)loadData {
-	
 	months = [NSMutableArray arrayWithCapacity:10];
 	
 	YIPhase *phase = [self.family.phaseList firstObject];
@@ -215,8 +214,6 @@
 			return [PNLineChartDataItem dataItemWithY:allExpensesMoney];
 		};
 		[lineCharts addObject:dataAll];
-		
-
 	}
 
 	// 收入部分
@@ -276,7 +273,6 @@
 			return [PNLineChartDataItem dataItemWithY:allIncomeMoney];
 		};
 		[lineCharts addObject:dataAll];
-
 	}
 	
 	

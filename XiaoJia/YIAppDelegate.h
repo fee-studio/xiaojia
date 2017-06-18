@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-#import <WXOpenIMSDKFMWK/YWFMWK.h>
-#import <WXOUIModule/YWUIFMWK.h>
-#import <YWFeedbackServiceFMWK/YWFeedbackServiceFMWK.h>
-#import <ALBBPush/CloudPushSDK.h>
-#import <ALBBSDK/ALBBSDK.h>
+//#import <WXOpenIMSDKFMWK/YWFMWK.h>
+//#import <WXOUIModule/YWUIFMWK.h>
+//#import <YWFeedbackServiceFMWK/YWFeedbackServiceFMWK.h>
+//#import <ALBBPush/CloudPushSDK.h>
+//#import <ALBBSDK/ALBBSDK.h>
 
 
 @interface YIAppDelegate : UIResponder <UIApplicationDelegate>
@@ -25,7 +25,7 @@
 @property(readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 
-@property (strong, nonatomic, readwrite) YWIMKit *ywIMKit;
+//@property (strong, nonatomic, readwrite) YWIMKit *ywIMKit;
 
 
 

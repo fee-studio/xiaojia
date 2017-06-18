@@ -47,6 +47,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.title = @"添加阶段";
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
 	[self loadUI];
@@ -71,8 +72,9 @@
 	
 	// set name toolbar
 	tfName = [[YITextField alloc] init];
-	tfName.backgroundColor = kAppColorWhite;
-	tfName.placeholder = @"设置此阶段的名字";
+	tfName.backgroundColor = [UIColor oldLaceColor];
+	tfName.placeholder = @"请输入此阶段的名字，如：第一家公司期间";
+	tfName.font = kAppMidFont;
 	[self.view addSubview:tfName];
 	[tfName mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.left.equalTo(tfName.superview);
@@ -140,14 +142,22 @@
 }
 
 - (void)loadDATA {
+	NSDate *today = [NSDate date];
+	NSDateComponents *dateComponents = [[NSCalendar currentCalendar]
+			components:NSCalendarUnitDay
+					| NSCalendarUnitMonth
+					| NSCalendarUnitYear
+			  fromDate:today];
+	NSInteger year = [dateComponents year];
+	
 	// table view datasource
-    for (int i = 0, value = 2016 - 50; i < 100; ++i) {
-        [years addObject:@(value++)];
+    for (NSInteger i = year - 30; i <= year; ++i) {
+        [years addObject:@(i)];
     }
 
     // http://stackoverflow.com/questions/16071503/how-to-tell-when-uitableview-has-completed-reloaddata
     dispatch_async(dispatch_get_main_queue(), ^{
-        [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:50]
+        [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:30]
                          atScrollPosition:UITableViewScrollPositionMiddle
                                  animated:NO];
     });

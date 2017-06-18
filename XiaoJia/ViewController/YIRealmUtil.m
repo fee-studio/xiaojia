@@ -9,8 +9,7 @@
 #import "YIFrequency.h"
 
 @interface YIRealmUtil() {
-
-    RLMRealm *realm;
+	RLMRealm *realm;
 }
 
 @end
@@ -33,20 +32,24 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-//        [self initRealm];
+
     }
     return self;
+}
+
+- (NSURL *)getAppMainDBUrl {
+	NSString *filePath = [[[YIFileUtil appDocumentDirectory]
+						   stringByAppendingPathComponent:@"bill"]
+						  stringByAppendingPathExtension:@"realm"];
+	NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+	NSLog(@"数据库的位置: %@",fileURL);
+	return fileURL;
 }
 
 // 【1】配置并初始化应用主数据库
 - (void)initRealm {
     // 自定义数据库的位置和名字
-    NSString *filePath = [[[YIFileUtil appDocumentDirectory]
-            stringByAppendingPathComponent:@"bill"]
-            stringByAppendingPathExtension:@"realm"];
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-	NSLog(@"数据库的位置: %@",fileURL);
-
+	NSURL *fileURL = [self getAppMainDBUrl];
 	// 获取默认的数据库配置
 	RLMRealmConfiguration *config = [RLMRealmConfiguration defaultConfiguration];
 	// 设置新的架构版本。这个版本号必须高于之前所用的版本号（如果您之前从未设置过架构版本，那么这个版本号设置为 0）
@@ -70,10 +73,7 @@
 	
 //	// 按新的配置创建数据库
 //	realm  = [RLMRealm defaultRealm];
-
-//	[YIIncomeTag createOrUpdateInDefaultRealmWithValue:];
 	
-	// [[NSFileManager defaultManager] removeItemAtURL:fileURL error:nil];
     // 默认值导入到主数据库中
     NSURL *defaultDataUrl = [[NSBundle mainBundle] URLForResource:@"default-data" withExtension:@"realm"];
 	[[NSFileManager defaultManager] copyItemAtURL:defaultDataUrl toURL:fileURL error:nil];
@@ -90,7 +90,6 @@
 // 【import default data tool】
 - (void)buildDefaultData {
     RLMRealmConfiguration *config = [RLMRealmConfiguration defaultConfiguration];
-
     // https://realm.io/cn/docs/objc/latest/#realm--5
     // 默认值数据库的位置
     NSString *defaultDataFilePath = [[[YIFileUtil appDocumentDirectory]
@@ -108,12 +107,16 @@
     // 这有助于减少 Realm 的文件体积，让您发布的应用体积更小；
     [realm writeCopyToURL:defaultDataFileURL encryptionKey:nil error:nil];
 
-    [self importExpensesTagDefaultData];
-    [self importIncomeTagDefaultData];
-    [self importFrequencyDefaultData];
+	// 导入默认数据
+	[self importExpensesTagDefaultData:realm];
+    [self importIncomeTagDefaultData:realm];
+    [self importFrequencyDefaultData:realm];
+	
+	// 最后删除原有的数据库文件
+	[[NSFileManager defaultManager] removeItemAtURL:[self getAppMainDBUrl] error:nil];
 }
 
-- (void)importIncomeTagDefaultData {
+- (void)importIncomeTagDefaultData:(RLMRealm *)realm {
     // Import JSON
     NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"income-tag" ofType:@"json"];
     NSData *jsonData = [NSData dataWithContentsOfFile:jsonFilePath];
@@ -142,11 +145,9 @@
     for (YIIncomeTag *person in [YIIncomeTag allObjects]) {
         NSLog(@"YIIncomeTag persisted to realm: %@", person);
     }
-
-
 }
 
-- (void)importExpensesTagDefaultData {
+- (void)importExpensesTagDefaultData:(RLMRealm *)realm {
     // Import JSON
     NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"expenses-tag" ofType:@"json"];
     NSData *jsonData = [NSData dataWithContentsOfFile:jsonFilePath];
@@ -177,7 +178,7 @@
     }
 }
 
-- (void)importFrequencyDefaultData {
+- (void)importFrequencyDefaultData:(RLMRealm *)realm {
     // Import JSON
     NSString *jsonFilePath = [[NSBundle mainBundle] pathForResource:@"frequency" ofType:@"json"];
     NSData *jsonData = [NSData dataWithContentsOfFile:jsonFilePath];

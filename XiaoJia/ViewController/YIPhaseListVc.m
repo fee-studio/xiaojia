@@ -9,6 +9,7 @@
 #import "YIAddBillVc.h"
 #import "YIBillListVc.h"
 #import "YIBillChartVc.h"
+#import "YIChartJsVc.h"
 
 
 @interface YIPhaseListVc() <UITableViewDataSource, UITableViewDelegate, YIAddPhaseVcDelegate>
@@ -35,13 +36,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+	self.title = @"阶段列表";
+	
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc] initWithTitle:@"添加"
                                                                 style:UIBarButtonItemStylePlain
                                                                target:self
                                                                action:@selector(addItemAction:)];
 	
-	UIBarButtonItem *creatChartItem = [[UIBarButtonItem alloc] initWithTitle:@"生成图表"
+	UIBarButtonItem *creatChartItem = [[UIBarButtonItem alloc] initWithTitle:@"生成报表"
 																style:UIBarButtonItemStylePlain
 															   target:self
 															   action:@selector(createChartItemAction:)];
@@ -61,7 +63,6 @@
     }];
 }
 
-
 - (void)addItemAction:(UIBarButtonItem *)buttonItem {
     YIAddPhaseVc *vc = [[YIAddPhaseVc alloc] init];
     vc.phaseList = self.family.phaseList;
@@ -72,7 +73,8 @@
 
 
 - (void)createChartItemAction:(UIBarButtonItem *)bbi {
-	YIBillChartVc *vc = [[YIBillChartVc alloc] init];
+//	YIBillChartVc *vc = [[YIBillChartVc alloc] init];
+    YIChartJsVc *vc = [[YIChartJsVc alloc] init];
 	vc.family = _family;
 	YIBaseNavigationController *nc = [[YIBaseNavigationController alloc] initWithRootViewController:vc];
 	[self presentViewController:nc animated:YES completion:NULL];
